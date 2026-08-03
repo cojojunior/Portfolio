@@ -10,28 +10,25 @@ const ProjectsPage = () => {
   );
 
   return (
-    <section className="min-h-screen px-4 sm:px-6 lg:px-8 pt-28 pb-20 bg-white">
+    <section className="min-h-screen px-3 sm:px-6 lg:px-8 pt-24 sm:pt-28 pb-12 sm:pb-20 bg-white">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12">
-          <div className="flex items-center justify-center gap-4 mb-4">
-            <span className="w-1 h-8 bg-golden rounded-full" />
-            <span className="text-golden text-sm font-bold tracking-wider uppercase">
-              Portfolio
-            </span>
+        <div className="text-center mb-8 sm:mb-12">
+          <div className="flex items-center justify-center gap-4 mb-3 sm:mb-4">
+            <span className="w-0.5 sm:w-1 h-4 sm:h-8 bg-golden rounded-full" />
           </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-dark-navy tracking-tight mb-4">
+          <h1 className="text-2xl sm:text-5xl lg:text-6xl font-extrabold text-dark-navy tracking-tight mb-2 sm:mb-4">
             All Projects
           </h1>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-600 text-sm sm:text-lg max-w-2xl mx-auto">
             A showcase of my work in web development and graphic design.
           </p>
         </div>
 
         {/* Filter Buttons */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-6 sm:mb-12">
           <button
             onClick={() => setFilter("web")}
-            className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+            className={`px-4 sm:px-6 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-sm font-medium transition-all duration-300 ${
               filter === "web"
                 ? "bg-golden text-white shadow-[0_0_20px_rgba(252,163,17,0.3)]"
                 : "border border-golden/30 text-dark-navy hover:text-golden hover:border-golden"
@@ -40,7 +37,7 @@ const ProjectsPage = () => {
           </button>
           <button
             onClick={() => setFilter("graphics")}
-            className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+            className={`px-4 sm:px-6 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-sm font-medium transition-all duration-300 ${
               filter === "graphics"
                 ? "bg-golden text-white shadow-[0_0_20px_rgba(252,163,17,0.3)]"
                 : "border border-golden/30 text-dark-navy hover:text-golden hover:border-golden"
@@ -49,9 +46,9 @@ const ProjectsPage = () => {
           </button>
         </div>
 
-        {/* Projects Grid with equal height cards */}
+        {/* Projects Grid - 2 columns on mobile */}
         {filteredProjects.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 lg:gap-6">
             {filteredProjects.map((project, index) => (
               <div
                 key={project.id}
