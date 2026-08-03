@@ -19,17 +19,17 @@ const About = () => {
   return (
     <section
       id="about"
-      className="min-h-[70vh] flex items-center justify-center px-2 sm:px-6 lg:px-8 py-2 sm:py-12 bg-white my-[5px]">
+      className="min-h-[10vh] flex items-center justify-center px-3 sm:px-6 lg:px-8 py-2 sm:py-12 bg-white my-[10px]">
       <div className="max-w-7xl mx-auto w-full">
-        {/* Main Content - 2 columns on mobile */}
-        <div className="grid grid-cols-2 lg:grid-cols-2 gap-2 sm:gap-8 lg:gap-12 items-stretch">
-          {/* Left Image */}
-          <div className="col-span-2 sm:col-span-1 animate-fade-in-left flex items-stretch">
-            <div className="relative w-full max-w-[140px] sm:max-w-md mx-auto lg:mx-0 flex items-center">
+        {/* Main Content - 2 columns on mobile with image left */}
+        <div className="grid grid-cols-2 gap-2 sm:gap-8 lg:gap-12 items-center">
+          {/* LEFT COLUMN - Image */}
+          <div className="col-span-1 animate-fade-in-left flex items-center justify-start">
+            <div className="relative w-full max-w-[140px] sm:max-w-md">
               <div className="relative w-full aspect-[3/4] rounded-lg sm:rounded-2xl overflow-hidden bg-gradient-to-br from-golden/20 to-golden/10 backdrop-blur-sm border-2 border-golden/30 shadow-[0_15px_40px_rgba(252,163,17,0.15)]">
                 <img
-                  src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&h=800&fit=crop"
-                  alt="Developer working at desk with multiple monitors"
+                  src="/img/me.jpg"
+                  alt="Developer"
                   className="w-full h-full object-cover object-center"
                 />
                 <div className="absolute inset-0 rounded-lg sm:rounded-2xl bg-gradient-to-b from-transparent via-transparent/30 to-golden/10 pointer-events-none" />
@@ -47,8 +47,8 @@ const About = () => {
             </div>
           </div>
 
-          {/* Right Content */}
-          <div className="col-span-2 sm:col-span-1 animate-fade-in-right flex flex-col justify-center">
+          {/* RIGHT COLUMN - Text Content */}
+          <div className="col-span-1 animate-fade-in-right">
             <div className="flex items-center gap-1.5 sm:gap-4 mb-1 sm:mb-4">
               <span className="w-0.5 sm:w-1 h-1.5 sm:h-5 bg-golden rounded-full" />
               <span className="text-golden text-[7px] sm:text-sm font-bold tracking-wider uppercase">
@@ -111,7 +111,7 @@ const About = () => {
           </div>
         </div>
 
-        {/* Skills - Auto-scrolling marquee */}
+        {/* Skills - Full width underneath both columns */}
         <div className="mt-2 sm:mt-6 lg:mt-8 overflow-hidden border-y border-golden/20 py-1.5 sm:py-4">
           <div className="flex items-center gap-1.5 sm:gap-4 mb-1 sm:mb-2 px-2">
             <span className="w-0.5 sm:w-1 h-1.5 sm:h-5 bg-golden rounded-full flex-shrink-0" />
