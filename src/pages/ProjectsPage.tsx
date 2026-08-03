@@ -13,9 +13,6 @@ const ProjectsPage = () => {
     <section className="min-h-screen px-3 sm:px-6 lg:px-8 pt-24 sm:pt-28 pb-12 sm:pb-20 bg-white">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-8 sm:mb-12">
-          <div className="flex items-center justify-center gap-4 mb-3 sm:mb-4">
-            <span className="w-0.5 sm:w-1 h-4 sm:h-8 bg-golden rounded-full" />
-          </div>
           <h1 className="text-2xl sm:text-5xl lg:text-6xl font-extrabold text-dark-navy tracking-tight mb-2 sm:mb-4">
             All Projects
           </h1>
