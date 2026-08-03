@@ -1,0 +1,164 @@
+@import 'tailwindcss';
+
+@theme {
+  /* Colors */
+  --color-white: #ffffff;
+  --color-dark-navy: #0a1628;
+  --color-black: #000000;
+  --color-golden: #fca311;
+  --color-golden-dark: #e59400;
+  --color-golden-light: #ffd166;
+  --color-soft-gray: #6b7280;
+  --color-light-gray: #f3f4f6;
+
+  /* Font Family */
+  --font-family-sans: Inter, Poppins, system-ui, -apple-system, sans-serif;
+
+  /* Border Radius */
+  --radius-2xl: 2rem;
+
+  /* Keyframes */
+  @keyframes pulse-dot {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.5); opacity: 0.5; }
+  }
+
+  @keyframes glow-pulse {
+    0%, 100% { box-shadow: 0 0 20px rgba(252, 163, 17, 0.1); }
+    50% { box-shadow: 0 0 30px rgba(252, 163, 17, 0.2); }
+  }
+
+  @keyframes circuit-drift {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(50px, 50px); }
+  }
+
+  @keyframes fade-in-left {
+    0% { opacity: 0; transform: translateX(-40px); }
+    100% { opacity: 1; transform: translateX(0); }
+  }
+
+  @keyframes fade-in-right {
+    0% { opacity: 0; transform: translateX(40px); }
+    100% { opacity: 1; transform: translateX(0); }
+  }
+
+  @keyframes fade-in-up {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    25% { transform: scale(1.1); }
+    50% { transform: scale(1); }
+  }
+
+  /* Zoom Animation */
+  @keyframes zoom-in {
+    0% { 
+      opacity: 0; 
+      transform: scale(0.8); 
+    }
+    100% { 
+      opacity: 1; 
+      transform: scale(1); 
+    }
+  }
+
+  /* Skills Scrolling Animation */
+  @keyframes scroll-skills {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-33.33%); }
+  }
+
+  /* Animation Utilities */
+  --animate-pulse-dot: pulse-dot 2s ease-in-out infinite;
+  --animate-glow-pulse: glow-pulse 3s ease-in-out infinite;
+  --animate-circuit-drift: circuit-drift 30s linear infinite;
+  --animate-fade-in-left: fade-in-left 0.8s ease-out;
+  --animate-fade-in-right: fade-in-right 0.8s ease-out;
+  --animate-fade-in-up: fade-in-up 0.6s ease-out;
+  --animate-heartbeat: heartbeat 1.5s ease-in-out infinite;
+  --animate-zoom-in: zoom-in 0.5s ease-out;
+  --animate-scroll-skills: scroll-skills 20s linear infinite;
+}
+
+/* Base styles */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-white);
+    color: var(--color-black);
+    font-family: var(--font-family-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: var(--color-golden);
+    color: var(--color-white);
+  }
+
+  /* Scrollbar Styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: var(--color-white);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(252, 163, 17, 0.3);
+    border-radius: 9999px;
+    transition: background-color 0.3s;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(252, 163, 17, 0.5);
+  }
+}
+
+/* Custom Utilities - Using regular CSS classes instead of @utility */
+@layer utilities {
+  .bg-gradient-radial {
+    background-image: radial-gradient(var(--tw-gradient-stops));
+  }
+
+  /* Zoom Animation Classes */
+  .animate-zoom-in {
+    animation: zoom-in 0.5s ease-out;
+  }
+
+  /* Skills Scrolling */
+  .animate-scroll-skills {
+    animation: scroll-skills 20s linear infinite;
+  }
+
+  .animate-scroll-skills:hover {
+    animation-play-state: paused;
+  }
+
+  /* Project Card Wrapper - Hover Zoom */
+  .project-card-wrapper {
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .project-card-wrapper:hover {
+    transform: scale(1.02);
+  }
+
+  /* Image Zoom on Hover */
+  .project-image-zoom {
+    transition: transform 0.7s ease-in-out;
+  }
+
+  .project-image-zoom:hover {
+    transform: scale(1.1);
+  }
+}

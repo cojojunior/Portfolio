@@ -1,0 +1,101 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { projects } from "@/data/projects";
+import ProjectCard from "./ProjectCard";
+import { ArrowRight } from "lucide-react";
+
+const Projects = () => {
+  const [filter, setFilter] = useState<"all" | "web" | "graphics">("all");
+
+  const filteredProjects = projects.filter(
+    (project) => filter === "all" || project.category === filter,
+  );
+
+  // Show only first 6 projects on home page
+  const displayedProjects = filteredProjects.slice(0, 6);
+
+  return (
+    <section
+      id="projects"
+      className="min-h-[70vh] flex items-center justify-center px-2 sm:px-6 lg:px-8 py-2 sm:py-12 bg-white my-[5px]">
+      <div className="max-w-7xl mx-auto w-full">
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1.5 sm:gap-6 mb-2 sm:mb-8">
+          <div>
+            <div className="flex items-center gap-1 sm:gap-4 mb-0.5 sm:mb-4">
+              <span className="w-0.5 sm:w-1 h-1.5 sm:h-5 bg-golden rounded-full" />
+              <span className="text-golden text-[6px] sm:text-sm font-bold tracking-wider uppercase">
+                Portfolio
+              </span>
+            </div>
+            <h2 className="text-sm sm:text-4xl lg:text-5xl font-extrabold text-dark-navy tracking-tight">
+              Featured Projects
+            </h2>
+          </div>
+
+          <div className="flex gap-1 sm:gap-3">
+            <button
+              onClick={() => setFilter("all")}
+              className={`px-2 sm:px-5 py-0.5 sm:py-2 rounded-full text-[6px] sm:text-sm font-medium transition-all duration-300 ${
+                filter === "all"
+                  ? "bg-golden text-white shadow-[0_0_20px_rgba(252,163,17,0.3)]"
+                  : "border border-golden/30 text-dark-navy hover:text-golden hover:border-golden"
+              }`}>
+              All
+            </button>
+            <button
+              onClick={() => setFilter("web")}
+              className={`px-2 sm:px-5 py-0.5 sm:py-2 rounded-full text-[6px] sm:text-sm font-medium transition-all duration-300 ${
+                filter === "web"
+                  ? "bg-golden text-white shadow-[0_0_20px_rgba(252,163,17,0.3)]"
+                  : "border border-golden/30 text-dark-navy hover:text-golden hover:border-golden"
+              }`}>
+              Web
+            </button>
+            <button
+              onClick={() => setFilter("graphics")}
+              className={`px-2 sm:px-5 py-0.5 sm:py-2 rounded-full text-[6px] sm:text-sm font-medium transition-all duration-300 ${
+                filter === "graphics"
+                  ? "bg-golden text-white shadow-[0_0_20px_rgba(252,163,17,0.3)]"
+                  : "border border-golden/30 text-dark-navy hover:text-golden hover:border-golden"
+              }`}>
+              Graphics
+            </button>
+          </div>
+        </div>
+
+        {/* Projects Grid - 3 columns */}
+        <div className="grid grid-cols-3 gap-1.5 sm:gap-4 lg:gap-6">
+          {displayedProjects.map((project, index) => (
+            <div
+              key={project.id}
+              className="animate-zoom-in"
+              style={{
+                animationDelay: `${index * 100}ms`,
+                animationFillMode: "backwards",
+              }}>
+              <div className="transition-transform duration-300 ease-in-out hover:scale-[1.02] h-full">
+                <ProjectCard project={project} />
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* View All Projects Button */}
+        <div className="text-center mt-2 sm:mt-8">
+          <Link
+            to="/projects"
+            className="inline-flex items-center gap-1 sm:gap-3 px-3 sm:px-8 py-1 sm:py-4 bg-golden text-white font-semibold rounded-lg sm:rounded-xl transition-all duration-300 hover:bg-golden-dark hover:-translate-y-0.5 hover:shadow-[0_8px_32px_rgba(252,163,17,0.4)] shadow-[0_4px_20px_rgba(252,163,17,0.3)] group text-[8px] sm:text-base">
+            <span>View All Projects</span>
+            <ArrowRight
+              size={12}
+              className="sm:w-5 sm:h-5 transition-transform duration-300 group-hover:translate-x-1"
+            />
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Projects;
