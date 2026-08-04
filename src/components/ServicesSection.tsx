@@ -19,10 +19,10 @@ const ServicesSection = () => {
 
   if (loading) {
     return (
-      <section className="py-12 md:py-20 bg-[#0d1117]">
+      <section className="py-12 md:py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-8 md:mb-12">
-            <h2 className="text-2xl md:text-4xl font-bold text-white mb-4">
+            <h2 className="text-2xl md:text-4xl font-bold text-dark-navy mb-4">
               Loading Services...
             </h2>
           </div>
@@ -32,14 +32,14 @@ const ServicesSection = () => {
   }
 
   return (
-    <section className="py-1 md:py-20 bg-white">
+    <section className="py-12 md:py-20 bg-white">
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-8 md:mb-16">
           <h2 className="text-2xl md:text-4xl font-bold text-dark-navy mt-2 md:mt-3 mb-2 md:mb-4">
             My <span className="text-golden">Services</span>
           </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto text-xs md:text-base px-2">
+          <p className="text-gray-600 max-w-2xl mx-auto text-xs md:text-base px-2">
             I offer a wide range of services to help you build your online
             presence and grow your business.
           </p>
@@ -50,9 +50,9 @@ const ServicesSection = () => {
           {services.map((service) => (
             <div
               key={service.id}
-              className="bg-white/10 rounded-lg md:rounded-xl p-3 md:p-8 border border-gray-700/50 hover:border-golden/30 transition-all duration-300 group hover:shadow-lg hover:shadow-golden/5">
+              className="bg-white-50 rounded-lg md:rounded-xl p-3 md:p-8 border border-gray-200 hover:border-golden/50 transition-all duration-300 group hover:shadow-lg hover:shadow-golden/5">
               {/* Icon - Smaller on mobile */}
-              <div className="w-10 h-10 md:w-16 md:h-16 rounded-lg bg-golden/20 flex items-center justify-center mb-2 md:mb-5 group-hover:bg-golden/30 transition-all duration-300">
+              <div className="w-10 h-10 md:w-16 md:h-16 rounded-lg bg-golden/10 flex items-center justify-center mb-2 md:mb-5 group-hover:bg-golden/20 transition-all duration-300">
                 {getIcon(service.icon)}
               </div>
 
@@ -62,12 +62,12 @@ const ServicesSection = () => {
               </h3>
 
               {/* Description - Hidden on mobile, show on tablet+ */}
-              <p className="hidden sm:block text-dark-navy-200 text-sm leading-relaxed mb-4 line-clamp-3">
+              <p className="hidden sm:block text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
                 {service.description}
               </p>
 
               {/* Description - Short version for mobile */}
-              <p className="sm:hidden text-dark-navy-200 text-[10px] leading-relaxed mb-2 line-clamp-2">
+              <p className="sm:hidden text-gray-500 text-[10px] leading-relaxed mb-2 line-clamp-2">
                 {service.description}
               </p>
 
@@ -77,12 +77,12 @@ const ServicesSection = () => {
                   {service.features.slice(0, 2).map((feature, idx) => (
                     <span
                       key={idx}
-                      className="px-1.5 md:px-2.5 py-0.5 bg-dark-navy/20 text-golden-300 rounded text-[8px] md:text-xs">
+                      className="px-1.5 md:px-2.5 py-0.5 bg-golden/200/70 text-gray-700 rounded text-[8px] md:text-xs">
                       {feature}
                     </span>
                   ))}
                   {service.features.length > 2 && (
-                    <span className="px-1.5 md:px-2.5 py-0.5 bg-dark-navy/20 text-golden-200 rounded text-[8px] md:text-xs">
+                    <span className="px-1.5 md:px-2.5 py-0.5 bg-golden/200/70 text-gray-700 rounded text-[8px] md:text-xs">
                       +{service.features.length - 2}
                     </span>
                   )}
@@ -91,7 +91,7 @@ const ServicesSection = () => {
 
               {/* Price - Smaller on mobile */}
               {service.price && (
-                <div className="mt-2 md:mt-4 pt-2 md:pt-4 border-t border-gray-700/50">
+                <div className="mt-2 md:mt-4 pt-2 md:pt-4 border-t border-gray-200">
                   <span className="text-golden font-semibold text-xs md:text-base">
                     {service.price}
                   </span>
