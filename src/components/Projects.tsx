@@ -17,17 +17,11 @@ const Projects = () => {
   return (
     <section
       id="projects"
-      className="min-h-[70vh] flex items-center justify-center px-2 sm:px-6 lg:px-8 py-2 sm:py-12 bg-white my-[5px]">
+      className="min-h-[10vh] flex items-center justify-center px-2 sm:px-6 lg:px-8 py-2 sm:py-12 bg-white my-[10px]">
       <div className="max-w-7xl mx-auto w-full">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1.5 sm:gap-6 mb-2 sm:mb-8">
           <div>
-            <div className="flex items-center gap-1 sm:gap-4 mb-0.5 sm:mb-4">
-              <span className="w-0.5 sm:w-1 h-1.5 sm:h-5 bg-golden rounded-full" />
-              <span className="text-golden text-[6px] sm:text-sm font-bold tracking-wider uppercase">
-                Portfolio
-              </span>
-            </div>
             <h2 className="text-sm sm:text-4xl lg:text-5xl font-extrabold text-dark-navy tracking-tight">
               Featured Projects
             </h2>
