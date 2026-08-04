@@ -1,12 +1,11 @@
 import { Project } from "@/types";
-import { Calendar } from "lucide-react";
+import { Calendar, Eye } from "lucide-react";
 
 interface ProjectCardProps {
   project: Project;
 }
 
 const ProjectCard = ({ project }: ProjectCardProps) => {
-  // Format date if available
   const formatDate = (dateString?: string) => {
     if (!dateString) return null;
     const date = new Date(dateString);
@@ -19,6 +18,21 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
 
   const createdDate = formatDate(project.created_at);
 
+  // Determine the link to use
+  const getProjectLink = () => {
+    if (project.link && project.link !== "#") {
+      return project.link;
+    }
+    return project.image;
+  };
+
+  const handleViewProject = () => {
+    const link = getProjectLink();
+    if (link) {
+      window.open(link, "_blank");
+    }
+  };
+
   return (
     <div className="group rounded-lg sm:rounded-2xl overflow-hidden bg-white border border-golden/20 shadow-[0_4px_16px_rgba(0,0,0,0.06)] transition-all duration-300 hover:border-golden/50 hover:shadow-[0_8px_30px_rgba(252,163,17,0.12)] h-full flex flex-col">
       {/* Image */}
@@ -27,6 +41,9 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
           src={project.image}
           alt={project.title}
           className="w-full h-full object-cover object-center transition-transform duration-700 ease-in-out group-hover:scale-110"
+          onError={(e) => {
+            (e.target as HTMLImageElement).src = "/img/placeholder.jpg";
+          }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent/10 to-golden/10 pointer-events-none transition-opacity duration-300 group-hover:opacity-0" />
       </div>
@@ -38,7 +55,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
           {project.title}
         </h3>
 
-        {/* Created Date - New */}
+        {/* Created Date */}
         {createdDate && (
           <div className="flex items-center gap-1 text-gray-400 text-[5px] sm:text-xs mb-1 sm:mb-2">
             <Calendar size={10} className="sm:w-3 sm:h-3" />
@@ -67,16 +84,13 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
           )}
         </div>
 
-        {/* Button */}
-        {project.link && project.link !== "#" && (
-          <a
-            href={project.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block w-full text-center px-1.5 sm:px-4 py-1 sm:py-2.5 bg-golden text-white font-semibold rounded-lg text-[6px] sm:text-xs md:text-sm transition-all duration-300 hover:bg-golden-dark hover:-translate-y-0.5 hover:shadow-[0_4px_15px_rgba(252,163,17,0.25)] shadow-[0_2px_10px_rgba(252,163,17,0.15)] mt-auto">
-            View Project
-          </a>
-        )}
+        {/* View Project Button - Always visible */}
+        <button
+          onClick={handleViewProject}
+          className="inline-block w-full text-center px-1.5 sm:px-4 py-1 sm:py-2.5 bg-golden text-white font-semibold rounded-lg text-[6px] sm:text-xs md:text-sm transition-all duration-300 hover:bg-golden-dark hover:-translate-y-0.5 hover:shadow-[0_4px_15px_rgba(252,163,17,0.25)] shadow-[0_2px_10px_rgba(252,163,17,0.15)] mt-auto flex items-center justify-center gap-1.5">
+          <Eye size={14} className="w-3 h-3 sm:w-4 sm:h-4" />
+          View Project
+        </button>
       </div>
     </div>
   );
