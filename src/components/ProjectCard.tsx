@@ -6,7 +6,7 @@ interface ProjectCardProps {
 
 const ProjectCard = ({ project }: ProjectCardProps) => {
   return (
-    <div className="group rounded-lg sm:rounded-2xl overflow-hidden bg-white border border-golden/20 shadow-[0_4px_16px_rgba(0,0,0,0.06)] transition-all duration-300 hover:border-golden/50 hover:shadow-[0_8px_30px_rgba(252,163,17,0.12)] h-full flex flex-col">
+    <div className="group rounded-lg sm:rounded-2xl overflow-hidden bg-white transition-all duration-150 hover:border-black/10 hover:shadow-[0_8px_30px_rgba(252,163,17,0.12)] h-full flex flex-col">
       {/* Image - Smaller aspect ratio */}
       <div className="relative w-full aspect-[4/3] overflow-hidden bg-gradient-to-br from-golden/10 to-golden/5 flex-shrink-0">
         <img
@@ -34,7 +34,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
           {project.tags.slice(0, 3).map((tag) => (
             <span
               key={tag}
-              className="px-1.5 sm:px-2.5 py-0.5 sm:py-1 border border-golden/10 rounded-md bg-golden/5 text-dark-navy text-[5px] sm:text-[10px] md:text-xs font-medium transition-all duration-100 group-hover:border-golden group-hover:text-golden group-hover:bg-golden/5 whitespace-nowrap">
+              className="px-1.5 sm:px-2.5 py-0.5 sm:py-1 border border-golden/10 rounded-md bg-dark-navy/5 text-dark-navy text-[5px] sm:text-[10px] md:text-xs font-medium transition-all duration-100 group-hover:border-golden/10 group-hover:text-black group-hover:bg-golden/2 whitespace-nowrap">
               {tag}
             </span>
           ))}
