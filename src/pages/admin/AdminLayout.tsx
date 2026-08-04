@@ -86,10 +86,10 @@ const AdminLayout = () => {
         />
       )}
 
-      {/* Sidebar - Overlays on mobile, static on desktop */}
+      {/* Sidebar - Fixed position, doesn't scroll */}
       <aside
         className={`
-          fixed md:relative z-50 h-screen
+          fixed z-50 h-screen
           bg-[#161b22] border-r border-gray-700/50
           transition-all duration-300 ease-in-out
           flex flex-col overflow-hidden flex-shrink-0
@@ -113,7 +113,7 @@ const AdminLayout = () => {
           </div>
         </div>
 
-        {/* Navigation */}
+        {/* Navigation - Scrollable if too many items */}
         <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
           {navItems.map((item) => (
             <Link
@@ -131,7 +131,7 @@ const AdminLayout = () => {
           ))}
         </nav>
 
-        {/* Logout */}
+        {/* Logout - Fixed at bottom */}
         <div className="p-4 border-t border-gray-700/50">
           <button
             onClick={handleLogout}
@@ -142,11 +142,12 @@ const AdminLayout = () => {
         </div>
       </aside>
 
-      {/* Main Content - No margin, full width */}
-      <div className="flex-1 min-h-screen w-full">
-        {/* Top Bar */}
-        <header className="bg-[#161b22] border-b border-gray-700/50 px-4 sm:px-6 py-4 flex items-center justify-between sticky top-0 z-40">
-          {/* ✅ Menu button only shows on mobile */}
+      {/* Main Content - Scrollable */}
+      <div
+        className={`flex-1 min-h-screen w-full ${isMobile ? "ml-0" : "ml-64"}`}>
+        {/* Top Bar - Fixed */}
+        <header className="bg-[#161b22] border-b border-gray-700/50 px-4 sm:px-6 py-4 flex items-center justify-between sticky top-0 z-30">
+          {/* Menu button only shows on mobile */}
           <button
             onClick={toggleSidebar}
             className="md:hidden text-gray-400 hover:text-white transition-all duration-300 p-2 hover:bg-gray-700/30 rounded-lg"
@@ -154,7 +155,7 @@ const AdminLayout = () => {
             <Menu className="w-5 h-5" />
           </button>
 
-          {/* ✅ Empty div to maintain spacing on desktop */}
+          {/* Empty div to maintain spacing on desktop */}
           <div className="hidden md:block"></div>
 
           <div className="flex items-center gap-3 sm:gap-4">
@@ -167,7 +168,7 @@ const AdminLayout = () => {
           </div>
         </header>
 
-        {/* Page Content */}
+        {/* Page Content - This is what scrolls */}
         <main className="p-4 sm:p-6">
           <Outlet />
         </main>
