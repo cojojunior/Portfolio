@@ -103,25 +103,6 @@
     background-color: var(--color-golden);
     color: var(--color-white);
   }
-
-  /* Scrollbar Styling */
-  ::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background-color: var(--color-white);
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background-color: rgba(252, 163, 17, 0.3);
-    border-radius: 9999px;
-    transition: background-color 0.3s;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(252, 163, 17, 0.5);
-  }
 }
 
 /* Custom Utilities - Using regular CSS classes instead of @utility */
@@ -162,3 +143,35 @@
     transform: scale(1.1);
   }
 }
+
+/* ========================================
+   HIDE SCROLLBAR - Keep scrolling functionality
+   ======================================== */
+
+/* For Firefox */
+* {
+  scrollbar-width: none;
+}
+
+/* For Chrome, Safari, Edge */
+*::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* For Internet Explorer and Edge Legacy */
+* {
+  -ms-overflow-style: none;
+}
+
+/* Alternative: if you want to hide scrollbar only on specific elements */
+/* Remove comments to use on specific containers */
+/*
+.scrollable-container {
+  scrollbar-width: none;
+}
+.scrollable-container::-webkit-scrollbar {
+  display: none;
+}
+*/
