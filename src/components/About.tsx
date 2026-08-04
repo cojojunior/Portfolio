@@ -17,7 +17,7 @@ const About = () => {
   return (
     <section
       id="about"
-      className="min-h-[20vh] flex items-center justify-center px-3 sm:px-6 lg:px-8 bg-white">
+      className="min-h-[30vh] flex items-center justify-center px-3 sm:px-6 lg:px-8 lg:py-5 bg-white">
       <div className="max-w-7xl mx-auto w-full">
         {/* Main Content - 2 columns on mobile with image left */}
         <div className="grid grid-cols-2 gap-2 sm:gap-8 lg:gap-12 items-center">
