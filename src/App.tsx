@@ -7,6 +7,8 @@ import Home from "./pages/Home";
 import ProjectsPage from "./pages/ProjectsPage";
 import BlogPage from "./pages/BlogPage";
 import AboutPage from "./pages/AboutPage";
+import Terms from "./pages/Terms";
+import Privacy from "./pages/Privacy";
 import AdminLogin from "./pages/admin/AdminLogin";
 import AdminRegister from "./pages/admin/AdminRegister";
 import AdminLayout from "./pages/admin/AdminLayout";
@@ -77,11 +79,15 @@ function App() {
               }
             />
 
-            {/* Admin Auth Routes */}
+            {/* ✅ Legal Pages */}
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/privacy" element={<Privacy />} />
+
+            {/* Admin Auth Routes (no Navbar/Footer) */}
             <Route path="/admin/login" element={<AdminLogin />} />
             <Route path="/admin/register" element={<AdminRegister />} />
 
-            {/* Admin Protected Routes */}
+            {/* Admin Protected Routes (no Navbar/Footer) */}
             <Route
               path="/admin"
               element={
@@ -94,8 +100,6 @@ function App() {
               <Route path="projects" element={<AdminProjects />} />
               <Route path="projects/new" element={<AdminProjectForm />} />
               <Route path="projects/edit/:id" element={<AdminProjectForm />} />
-
-              {/* ✅ Service routes - admin can manage them but they don't appear in sidebar */}
               <Route path="services" element={<AdminServices />} />
               <Route path="services/new" element={<AdminServiceForm />} />
               <Route path="services/edit/:id" element={<AdminServiceForm />} />
