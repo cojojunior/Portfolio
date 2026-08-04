@@ -88,6 +88,18 @@ const AdminLayout = () => {
     return "w-20";
   };
 
+  // Determine margin for main content
+  const getContentMargin = () => {
+    if (isMobile) {
+      return "ml-0";
+    }
+    // Desktop: match sidebar width
+    if (isHovered || sidebarOpen) {
+      return "ml-64";
+    }
+    return "ml-20";
+  };
+
   return (
     <div className="min-h-screen bg-[#0d1117] flex">
       {/* Overlay for mobile */}
@@ -106,7 +118,7 @@ const AdminLayout = () => {
           ${getSidebarWidth()}
           ${isMobile ? (sidebarOpen ? "translate-x-0" : "-translate-x-full") : "translate-x-0"}
           bg-[#161b22] border-r border-gray-700/50 transition-all duration-300 ease-in-out
-          flex flex-col fixed md:relative h-screen z-50 overflow-hidden
+          flex flex-col fixed md:relative h-screen z-50 overflow-hidden flex-shrink-0
         `}>
         {/* Logo */}
         <div className="p-4 border-b border-gray-700/50 flex items-center gap-3 min-h-[72px]">
@@ -133,7 +145,7 @@ const AdminLayout = () => {
               key={item.path}
               to={item.path}
               onClick={closeSidebar}
-              className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-300 group ${
+              className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-300 group relative ${
                 isActive(item.path)
                   ? "bg-golden/20 text-golden"
                   : "text-gray-400 hover:bg-gray-700/30 hover:text-white"
@@ -161,7 +173,7 @@ const AdminLayout = () => {
         <div className="p-4 border-t border-gray-700/50">
           <button
             onClick={handleLogout}
-            className="flex items-center gap-3 px-3 py-2.5 w-full rounded-lg text-red-400 hover:bg-red-500/10 transition-all duration-300 group">
+            className="flex items-center gap-3 px-3 py-2.5 w-full rounded-lg text-red-400 hover:bg-red-500/10 transition-all duration-300 group relative">
             <LogOut className="w-5 h-5 flex-shrink-0" />
             <span
               className={`text-sm whitespace-nowrap transition-opacity duration-300 ${
@@ -181,9 +193,13 @@ const AdminLayout = () => {
         </div>
       </aside>
 
-      {/* Main Content */}
+      {/* Main Content - No gap between sidebar and content */}
       <div
-        className={`flex-1 transition-all duration-300 ${isMobile ? "ml-0" : isHovered || sidebarOpen ? "ml-64" : "ml-20"}`}>
+        className={`
+          flex-1 transition-all duration-300 ease-in-out
+          ${getContentMargin()}
+          min-h-screen
+        `}>
         {/* Top Bar */}
         <header className="bg-[#161b22] border-b border-gray-700/50 px-4 sm:px-6 py-4 flex items-center justify-between sticky top-0 z-40">
           <button
