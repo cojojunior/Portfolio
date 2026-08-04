@@ -11,31 +11,9 @@ const Hero = () => {
 
   const roles = ["FRONTEND DEVELOPER", "GRAPHIC DESIGNER", "UI/UX DESIGNER"];
 
+  // Removed mouse movement effect - keeping only typing animation
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!profileCardRef.current) return;
-      const x = (window.innerWidth / 2 - e.clientX) / 50;
-      const y = (window.innerHeight / 2 - e.clientY) / 50;
-      profileCardRef.current.style.transform = `perspective(1000px) rotateX(${y}deg) rotateY(${x}deg) translateZ(20px)`;
-    };
-
-    const handleMouseLeave = () => {
-      if (!profileCardRef.current) return;
-      profileCardRef.current.style.transform =
-        "perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)";
-    };
-
-    document.addEventListener("mousemove", handleMouseMove);
-    document.addEventListener("mouseleave", handleMouseLeave);
-
-    return () => {
-      document.removeEventListener("mousemove", handleMouseMove);
-      document.removeEventListener("mouseleave", handleMouseLeave);
-    };
-  }, []);
-
-  // Typing animation effect
-  useEffect(() => {
+    // Typing animation effect
     const currentRole = roles[loopIndex % roles.length];
     const typingSpeed = isDeleting ? 80 : 150;
     const pauseDelay = 1500;
@@ -61,55 +39,54 @@ const Hero = () => {
   }, [displayText, isDeleting, loopIndex]);
 
   return (
-    <section className="min-h-[20vh] flex items-center justify-center relative overflow-hidden px-3 sm:px-6 lg:px-8 bg-white my-[10px]">
-      {/* Decorative Background Pattern */}
-      <div className="absolute inset-0 z-0 overflow-hidden opacity-5">
-        <div
-          className="absolute w-[150%] h-[150%] top-[-25%] right-[-25%] animate-circuit-drift"
-          style={{
-            background: `
-              repeating-linear-gradient(45deg, transparent, transparent 300px, #fca311 300px, #fca311 600px),
-              repeating-linear-gradient(-45deg, transparent, transparent 300px, #fca311 300px, #fca311 600px)
-            `,
-          }}
-        />
-      </div>
+    <section
+      className="min-h-[30vh] flex items-center justify-center relative overflow-hidden px-3 sm:px-6 lg:px-8 bg-cover bg-center bg-no-repeat my-[10px]"
+      style={{
+        backgroundImage: 'url("/img/hero.jpg")',
+      }}>
+      {/* Dark overlay for readability */}
+      <div className="absolute inset-0 bg-black/50 z-0 pointer-events-none" />
 
-      {/* Subtle Vignette */}
-      <div className="absolute inset-0 bg-gradient-radial from-transparent to-white/20 z-0 pointer-events-none" />
-
-      {/* 2 COLUMNS ON MOBILE */}
+      {/* 2 COLUMNS  */}
       <div className="max-w-7xl mx-auto w-full grid grid-cols-2 gap-2 sm:gap-8 lg:gap-12 items-center relative z-10">
         {/* LEFT COLUMN - Content */}
         <div className="col-span-1 animate-fade-in-left">
           {/* Badge */}
-          <div className="inline-flex items-center gap-1 sm:gap-4 px-2 sm:px-4 py-0.5 sm:py-2 border border-golden/40 rounded-full bg-golden/5 mb-2 sm:mb-6 animate-glow-pulse">
+          <div className="inline-flex items-center gap-1 sm:gap-4 px-2 sm:px-4 py-0.5 sm:py-2 border border-golden/40 rounded-full bg-black/30 backdrop-blur-sm mb-2 sm:mb-6 animate-glow-pulse tracking-wide">
             <span className="w-1 h-1 sm:w-2 sm:h-2 rounded-full bg-golden animate-pulse-dot" />
-            <span className="text-dark-navy text-[6px] sm:text-sm font-semibold tracking-wider">
-              Available
+            <span className="text-white text-[6px] sm:text-sm font-semibold tracking-wider">
+              Available For Bookings
             </span>
           </div>
 
           {/* Title */}
           <div className="mb-1 sm:mb-3">
-            <div className="text-dark-navy text-[8px] sm:text-2xl lg:text-3xl font-semibold sm:font-extrabold">
+            <div className="text-white text-[8px] sm:text-2xl lg:text-3xl font-semibold sm:font-extrabold drop-shadow-lg">
               Hi, I'm
             </div>
-            <div className="text-golden text-lg sm:text-5xl lg:text-6xl font-extrabold drop-shadow-[0_0_20px_rgba(252,163,17,0.3)] leading-tight">
+            <div className="text-golden text-lg sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-wide">
               Cojo
             </div>
           </div>
 
           {/* Typing Animation */}
-          <div className="mb-2 sm:mb-4">
-            <div className="text-gray-600 text-[7px] sm:text-lg lg:text-xl font-medium">
-              <span className="text-golden font-bold">
-                <span className="inline-block bg-golden/10 px-1 sm:px-2 py-0.5 sm:py-1 rounded-lg border border-golden/20 text-[7px] sm:text-base lg:text-xl">
+          <div className="mb-1 sm:mb-2">
+            <div className="text-white/90 text-[7px] sm:text-lg lg:text-xl font-medium drop-shadow-lg">
+              <span className="text-white font-m tracking-wider">
+                <span className="inline-block bg-black/30 backdrop-blur-sm px-1 sm:px-2 py-0.5 sm:py-1 rounded-lg border border-golden/20 text-[7px] sm:text-base lg:text-xl">
                   {displayText}
                   <span className="inline-block w-0.5 h-2 sm:h-5 lg:h-6 ml-0.5 bg-golden animate-pulse align-middle"></span>
                 </span>
               </span>
             </div>
+          </div>
+
+          {/* Description - Added under typing animation */}
+          <div className="mb-2 sm:mb-4">
+            <p className="text-white/80 text-[7px] sm:text-base leading-relaxed drop-shadow-lg max-w-md">
+              I build accessible, pixel-perfect, and performant modern web
+              applications with clean code and great UX.
+            </p>
           </div>
 
           {/* Buttons */}
@@ -121,18 +98,16 @@ const Hero = () => {
             </Link>
             <Link
               to="/#contact"
-              className="px-3 sm:px-8 py-1.5 sm:py-4 border-2 border-golden text-golden font-semibold rounded-lg sm:rounded-xl transition-all duration-300 hover:bg-golden/10 hover:translate-y-[-2px] hover:shadow-[0_8px_32px_rgba(252,163,17,0.2)] text-[7px] sm:text-base">
+              className="px-3 sm:px-8 py-1.5 sm:py-4 border-2 border-white text-white font-semibold rounded-lg sm:rounded-xl transition-all duration-300 hover:bg-white/10 hover:translate-y-[-2px] hover:shadow-[0_8px_32px_rgba(255,255,255,0.1)] text-[7px] sm:text-base">
               Let's Talk
             </Link>
           </div>
         </div>
 
-        {/* RIGHT COLUMN - Profile Image */}
+        {/* RIGHT COLUMN - Profile Image - No hover effect */}
         <div className="col-span-1 flex justify-end animate-fade-in-right">
-          <div
-            ref={profileCardRef}
-            className="relative w-full max-w-[120px] sm:max-w-md transition-all duration-300 ease-out">
-            <div className="relative aspect-[3/4] rounded-lg sm:rounded-2xl overflow-hidden bg-gradient-to-br from-golden/20 to-golden/10 backdrop-blur-sm border-2 border-golden/30 shadow-[0_10px_30px_rgba(252,163,17,0.12)]">
+          <div className="relative w-full max-w-[120px] sm:max-w-md">
+            <div className="relative aspect-[3/4] rounded-lg sm:rounded-2xl overflow-hidden">
               <img
                 src="/img/cojo.JPG"
                 alt="Cojo - UI/UX & Frontend Developer"
@@ -140,9 +115,10 @@ const Hero = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent/20 to-golden/10 pointer-events-none" />
 
-              <div className="absolute bottom-2 left-2 right-2 sm:bottom-6 sm:left-6 sm:right-6 bg-white/95 backdrop-blur-md px-1 sm:px-4 py-1 sm:py-3 rounded-md sm:rounded-xl border border-golden/20 text-center shadow-lg">
-                <span className="text-dark-navy font-medium text-[6px] sm:text-base">
-                  Accra, Ghana
+              {/* Location Badge */}
+              <div className="absolute bottom-2 left-1/2 -translate-x-1/2 sm:bottom-6 bg-white/95 backdrop-blur-md rounded-md sm:rounded-xl border border-golden/20 text-center shadow-lg h-4 w-20 flex items-center justify-center">
+                <span className="text-dark-navy font-black text-[5px] sm:text-[8px] whitespace-nowrap">
+                  Based In ACCRA, Ghana
                 </span>
               </div>
             </div>
