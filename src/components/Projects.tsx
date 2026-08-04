@@ -32,7 +32,7 @@ const Projects = () => {
   return (
     <section
       id="projects"
-      className="min-h-[20vh] flex items-center justify-center px-2 sm:px-6 lg:px-8 py-1 sm:py-12 bg-white my-[5px]">
+      className="min-h-[10vh] flex items-center justify-center px-2 sm:px-6 lg:px-8 py-1 sm:py-12 bg-white my-[5px]">
       <div className="max-w-7xl mx-auto w-full">
         <div className="flex flex-row items-center justify-between gap-1.5 sm:gap-6 mb-2 sm:mb-8">
           <div className="flex items-center gap-1 sm:gap-4">
