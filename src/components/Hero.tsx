@@ -36,19 +36,19 @@ const Hero = () => {
 
   return (
     <section
-      className="h-fit sm:h-[70vh] md:h-[80vh] lg:h-[85vh] flex items-center justify-center relative overflow-hidden px-3 sm:px-6 lg:px-8 bg-cover bg-center bg-no-repeat"
+      className="h-fit sm:h-[850vh] md:h-[85vh] lg:h-[85vh] flex items-center justify-center relative overflow-hidden px-3 sm:px-6 sm:py-70 lg:px-8 lg:py-70 bg-cover bg-center bg-no-repeat"
       style={{
         backgroundImage: 'url("/img/hero.jpg")',
       }}>
       {/* Dark overlay for readability */}
       <div className="absolute inset-0 bg-black/50 z-0 pointer-events-none" />
 
-      {/* 2 COLUMNS - Content drives height on mobile, fixed on tablet+ */}
-      <div className="max-w-7xl mx-auto w-full grid grid-cols-2 gap-2 sm:gap-8 lg:gap-12 items-center relative z-10 py-6 sm:py-10 lg:py-14">
+      {/* 2 COLUMNS - Minimal padding to account for fixed navbar */}
+      <div className="max-w-7xl mx-auto w-full grid grid-cols-2 gap-2 sm:gap-8 lg:gap-12 items-center relative z-10 py-1 sm:py-4 lg:py-6">
         {/* LEFT COLUMN - Content */}
         <div className="col-span-1 animate-fade-in-left">
           {/* Badge */}
-          <div className="inline-flex items-center gap-1 sm:gap-4 px-2 sm:px-4 py-0.5 sm:py-2 border border-golden/40 rounded-full bg-black/30 backdrop-blur-sm mb-2 sm:mb-6 animate-glow-pulse tracking-wide">
+          <div className="inline-flex items-center gap-1 sm:gap-4 px-2 sm:px-4 py-0.5 sm:py-2 border border-golden/40 rounded-full bg-black/30 backdrop-blur-sm mb-1.5 sm:mb-4 animate-glow-pulse tracking-wide">
             <span className="w-1 h-1 sm:w-2 sm:h-2 rounded-full bg-golden animate-pulse-dot" />
             <span className="text-white text-[6px] sm:text-sm font-semibold tracking-wider">
               Available For Bookings
@@ -56,7 +56,7 @@ const Hero = () => {
           </div>
 
           {/* Title */}
-          <div className="mb-1 sm:mb-3">
+          <div className="mb-1 sm:mb-2">
             <div className="text-white text-[8px] sm:text-2xl lg:text-3xl font-semibold sm:font-extrabold drop-shadow-lg">
               Hi, I'm
             </div>
@@ -78,7 +78,7 @@ const Hero = () => {
           </div>
 
           {/* Description - Hidden on mobile to save space */}
-          <div className="hidden sm:block mb-2 sm:mb-4">
+          <div className="hidden sm:block mb-1.5 sm:mb-3">
             <p className="text-white/80 text-sm sm:text-base leading-relaxed drop-shadow-lg max-w-md">
               I build accessible, pixel-perfect, and performant modern web
               applications with clean code and great UX.
@@ -86,15 +86,15 @@ const Hero = () => {
           </div>
 
           {/* Buttons */}
-          <div className="flex flex-wrap gap-1.5 sm:gap-4">
+          <div className="flex flex-wrap gap-1 sm:gap-4">
             <Link
               to="/projects"
-              className="px-3 sm:px-8 py-1.5 sm:py-4 bg-golden text-white font-semibold rounded-lg sm:rounded-xl transition-all duration-300 hover:bg-golden-dark hover:translate-y-[-2px] hover:shadow-[0_8px_32px_rgba(252,163,17,0.4)] shadow-[0_4px_20px_rgba(252,163,17,0.3)] text-[7px] sm:text-base">
+              className="px-3 sm:px-8 py-1 sm:py-3.5 bg-golden text-white font-semibold rounded-lg sm:rounded-xl transition-all duration-300 hover:bg-golden-dark hover:translate-y-[-2px] hover:shadow-[0_8px_32px_rgba(252,163,17,0.4)] shadow-[0_4px_20px_rgba(252,163,17,0.3)] text-[7px] sm:text-base">
               View Work
             </Link>
             <Link
               to="/#contact"
-              className="px-3 sm:px-8 py-1.5 sm:py-4 border-2 border-white text-white font-semibold rounded-lg sm:rounded-xl transition-all duration-300 hover:bg-white/10 hover:translate-y-[-2px] hover:shadow-[0_8px_32px_rgba(255,255,255,0.1)] text-[7px] sm:text-base">
+              className="px-3 sm:px-8 py-1 sm:py-3.5 border-2 border-white text-white font-semibold rounded-lg sm:rounded-xl transition-all duration-300 hover:bg-white/10 hover:translate-y-[-2px] hover:shadow-[0_8px_32px_rgba(255,255,255,0.1)] text-[7px] sm:text-base">
               Let's Talk
             </Link>
           </div>
