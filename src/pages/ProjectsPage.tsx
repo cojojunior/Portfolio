@@ -1,13 +1,28 @@
-import { useState } from "react";
-import { projects } from "@/data/projects";
+import { useState, useEffect } from "react";
+import { useAdmin } from "@/context/AdminContext";
 import ProjectCard from "@/components/ProjectCard";
 
 const ProjectsPage = () => {
   const [filter, setFilter] = useState<"web" | "graphics">("web");
+  const { projects, loading, refreshProjects } = useAdmin();
+
+  useEffect(() => {
+    refreshProjects();
+  }, []);
 
   const filteredProjects = projects.filter(
     (project) => project.category === filter,
   );
+
+  if (loading) {
+    return (
+      <section className="min-h-screen px-3 sm:px-6 lg:px-8 pt-24 sm:pt-28 pb-12 sm:pb-20 bg-white">
+        <div className="text-center py-20">
+          <div className="animate-pulse text-gray-400">Loading projects...</div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="min-h-screen px-3 sm:px-6 lg:px-8 pt-24 sm:pt-28 pb-12 sm:pb-20 bg-white">
@@ -43,7 +58,7 @@ const ProjectsPage = () => {
           </button>
         </div>
 
-        {/* Projects Grid - 2 columns on mobile */}
+        {/* Projects Grid */}
         {filteredProjects.length > 0 ? (
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 lg:gap-6">
             {filteredProjects.map((project, index) => (
