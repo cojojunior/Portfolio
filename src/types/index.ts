@@ -6,6 +6,13 @@ export interface Project {
   tags: string[];
   link?: string;
   category: "web" | "graphics" | "mobile";
+  created_at?: string;
+  updated_at?: string;
+}
+
+export interface AdminUser {
+  username: string;
+  password: string;
 }
 
 export interface BlogPost {

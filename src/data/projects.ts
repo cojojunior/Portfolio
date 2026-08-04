@@ -1,6 +1,7 @@
 import { Project } from "@/types";
 
-export const projects: Project[] = [
+// Default projects
+const defaultProjects: Project[] = [
   {
     id: 1,
     title: "TaskFlow Web App",
@@ -65,3 +66,52 @@ export const projects: Project[] = [
     category: "graphics",
   },
 ];
+
+// Function to get projects from localStorage or defaults
+export const getProjects = (): Project[] => {
+  // Check if we're in a browser environment
+  if (typeof window === "undefined") {
+    return defaultProjects;
+  }
+
+  try {
+    const saved = localStorage.getItem("portfolio_projects");
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        return parsed;
+      }
+    }
+  } catch (e) {
+    console.error("Error reading projects from localStorage:", e);
+  }
+
+  // If no saved projects or error, save defaults
+  try {
+    localStorage.setItem("portfolio_projects", JSON.stringify(defaultProjects));
+  } catch (e) {
+    console.error("Error saving default projects to localStorage:", e);
+  }
+
+  return defaultProjects;
+};
+
+// Function to update projects (called from admin)
+export const updateProjectsData = (newProjects: Project[]): void => {
+  try {
+    localStorage.setItem("portfolio_projects", JSON.stringify(newProjects));
+  } catch (e) {
+    console.error("Error saving projects to localStorage:", e);
+  }
+};
+
+// Export default projects for reference
+export { defaultProjects };
+
+// Export a projects array that gets initialized once
+export const projects: Project[] = (() => {
+  if (typeof window === "undefined") {
+    return defaultProjects;
+  }
+  return getProjects();
+})();
