@@ -2,11 +2,8 @@ const AboutPage = () => {
   return (
     <section className="min-h-screen px-4 sm:px-6 lg:px-8 pt-28 pb-20 bg-white">
       <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-12">
-          <div className="flex items-center justify-center gap-4 mb-4">
-            <span className="w-1 h-8 bg-golden rounded-full" />
-          </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-dark-navy tracking-tight mb-4">
+        <div className="text-center mb-8">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-dark-navy tracking-tight mb-1">
             About Me
           </h1>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">
