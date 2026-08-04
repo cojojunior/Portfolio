@@ -1,5 +1,5 @@
 import { Project } from "@/types";
-import { Calendar, Eye } from "lucide-react";
+import { Calendar } from "lucide-react";
 
 interface ProjectCardProps {
   project: Project;
@@ -34,13 +34,13 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
   };
 
   return (
-    <div className="group rounded-lg sm:rounded-2xl overflow-hidden bg-white border border-golden/20 shadow-[0_4px_16px_rgba(0,0,0,0.06)] transition-all duration-300 hover:border-golden/50 hover:shadow-[0_8px_30px_rgba(252,163,17,0.12)] h-full flex flex-col">
+    <div className="group rounded-lg sm:rounded-2xl overflow-hidden bg-white border border-dark-navy/10 shadow-[0_4px_16px_rgba(0,0,0,0.06)] transition-all duration-100 hover:border-dark-navy/20  h-full flex flex-col">
       {/* Image */}
-      <div className="relative w-full aspect-[4/3] overflow-hidden bg-gradient-to-br from-golden/10 to-golden/5 flex-shrink-0">
+      <div className="relative w-full aspect-[4/3] overflow-hidden  flex-shrink-0">
         <img
           src={project.image}
           alt={project.title}
-          className="w-full h-full object-cover object-center transition-transform duration-700 ease-in-out group-hover:scale-110"
+          className="w-full h-full object-cover object-center transition-transform duration-100 ease-in-out group-hover:scale-110"
           onError={(e) => {
             (e.target as HTMLImageElement).src = "/img/placeholder.jpg";
           }}
@@ -73,7 +73,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
           {project.tags.slice(0, 3).map((tag) => (
             <span
               key={tag}
-              className="px-1 sm:px-2.5 py-0.5 sm:py-1 border border-golden/20 rounded-md bg-golden/5 text-dark-navy text-[5px] sm:text-[10px] md:text-xs font-medium transition-all duration-300 group-hover:border-golden group-hover:text-golden group-hover:bg-golden/10 whitespace-nowrap">
+              className="px-1 sm:px-2.5 py-.5 sm:py-1 h-fit w-fit border border-golden/20 rounded-md bg-dark-navy/5 text-dark-navy text-[7px] sm:text-[10px] md:text-xs font-medium transition-all duration-100 group-hover:border-golden group-hover:text-golden group-hover:bg-golden/10 whitespace-nowrap">
               {tag}
             </span>
           ))}
@@ -88,7 +88,6 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
         <button
           onClick={handleViewProject}
           className="inline-block w-full text-center px-1.5 sm:px-4 py-1 sm:py-2.5 bg-golden text-white font-semibold rounded-lg text-[6px] sm:text-xs md:text-sm transition-all duration-300 hover:bg-golden-dark hover:-translate-y-0.5 hover:shadow-[0_4px_15px_rgba(252,163,17,0.25)] shadow-[0_2px_10px_rgba(252,163,17,0.15)] mt-auto flex items-center justify-center gap-1.5">
-          <Eye size={14} className="w-3 h-3 sm:w-4 sm:h-4" />
           View Project
         </button>
       </div>
