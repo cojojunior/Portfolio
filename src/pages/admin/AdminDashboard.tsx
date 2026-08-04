@@ -86,9 +86,17 @@ const AdminDashboard = () => {
         ))}
       </div>
 
-      {/* Recent Projects */}
+      {/* All Projects - FIXED: Removed .slice(0, 5) to show ALL projects */}
       <div className="bg-[#1a1f2e] rounded-xl border border-gray-700/50 p-6">
-        <h3 className="text-white font-semibold mb-4">Recent Projects</h3>
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="text-white font-semibold">All Projects</h3>
+          <Link
+            to="/admin/projects"
+            className="text-golden hover:text-golden-dark text-sm transition-all duration-300">
+            View All →
+          </Link>
+        </div>
+
         {projects.length > 0 ? (
           <div className="overflow-x-auto">
             <table className="w-full">
@@ -112,20 +120,25 @@ const AdminDashboard = () => {
                 </tr>
               </thead>
               <tbody>
-                {projects.slice(0, 5).map((project) => (
+                {/* 🔥 FIXED: Removed .slice(0, 5) to show ALL projects */}
+                {projects.map((project) => (
                   <tr
                     key={project.id}
                     className="border-b border-gray-700/30 hover:bg-gray-700/20 transition-all duration-300">
                     <td className="py-3">
                       <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-lg overflow-hidden bg-gray-700/50">
+                        <div className="w-8 h-8 rounded-lg overflow-hidden bg-gray-700/50 flex-shrink-0">
                           <img
                             src={project.image}
                             alt={project.title}
                             className="w-full h-full object-cover"
+                            onError={(e) => {
+                              (e.target as HTMLImageElement).src =
+                                "/placeholder.jpg";
+                            }}
                           />
                         </div>
-                        <span className="text-white font-medium text-sm">
+                        <span className="text-white font-medium text-sm line-clamp-1">
                           {project.title}
                         </span>
                       </div>
@@ -161,14 +174,17 @@ const AdminDashboard = () => {
             </table>
           </div>
         ) : (
-          <p className="text-gray-400 text-center py-8">
-            No projects yet.{" "}
-            <Link
-              to="/admin/projects/new"
-              className="text-golden hover:underline">
-              Add your first project
-            </Link>
-          </p>
+          <div className="text-center py-12">
+            <FolderOpen className="w-16 h-16 text-gray-600 mx-auto mb-4" />
+            <p className="text-gray-400">
+              No projects yet.{" "}
+              <Link
+                to="/admin/projects/new"
+                className="text-golden hover:underline">
+                Add your first project
+              </Link>
+            </p>
+          </div>
         )}
       </div>
     </div>
