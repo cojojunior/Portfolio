@@ -11,6 +11,7 @@ import {
   Menu,
   X,
   Home,
+  // ❌ REMOVE Briefcase from here - services not in admin
 } from "lucide-react";
 import { useState, useEffect } from "react";
 
@@ -52,11 +53,14 @@ const AdminLayout = () => {
     }
   };
 
+  // ✅ Services is NOT in this list - it only shows on the homepage
   const navItems = [
     { path: "/", icon: Home, label: "Home" },
     { path: "/admin/dashboard", icon: LayoutDashboard, label: "Dashboard" },
     { path: "/admin/projects", icon: FolderOpen, label: "Projects" },
     { path: "/admin/projects/new", icon: Plus, label: "Add Project" },
+    // ❌ Service removed from admin nav
+    // { path: "/admin/services", icon: Briefcase, label: "Services" },
     { path: "/admin/messages", icon: MessageSquare, label: "Messages" },
     { path: "/admin/users", icon: Users, label: "Users" },
     { path: "/admin/settings", icon: Settings, label: "Settings" },
