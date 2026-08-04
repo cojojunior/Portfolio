@@ -112,25 +112,39 @@ export const AdminProvider = ({ children }: { children: ReactNode }) => {
     const checkAuth = async () => {
       try {
         const session = await getSession();
-        setIsAuthenticated(!!session);
-        if (session) {
+        const isAuthed = !!session;
+        setIsAuthenticated(isAuthed);
+
+        // ✅ Sync localStorage with Supabase session on page load
+        if (isAuthed) {
+          localStorage.setItem("admin_auth", "true");
           const { user } = await getCurrentUser();
           setUser(user);
+        } else {
+          localStorage.removeItem("admin_auth");
+          setUser(null);
         }
       } catch (error) {
         console.error("Auth check error:", error);
+        localStorage.removeItem("admin_auth");
       }
     };
     checkAuth();
 
-    // Listen for auth changes - fixed: removed unused 'event' parameter
+    // Listen for auth changes
     const { data: authListener } = supabase.auth.onAuthStateChange(
       async (_event, session) => {
-        setIsAuthenticated(!!session);
-        if (session) {
+        const isAuthed = !!session;
+        setIsAuthenticated(isAuthed);
+
+        if (isAuthed) {
+          // ✅ Set localStorage when auth state changes
+          localStorage.setItem("admin_auth", "true");
           const { user } = await getCurrentUser();
           setUser(user);
         } else {
+          // ✅ Clear localStorage on logout
+          localStorage.removeItem("admin_auth");
           setUser(null);
         }
       },
@@ -236,9 +250,12 @@ export const AdminProvider = ({ children }: { children: ReactNode }) => {
     await loadProjects();
   };
 
+  // 🔥 FIXED: Now sets localStorage
   const login = async (email: string, password: string) => {
     const result = await signIn(email, password);
     if (result.success) {
+      // ✅ Set localStorage for ProtectedRoute
+      localStorage.setItem("admin_auth", "true");
       setIsAuthenticated(true);
       const { user } = await getCurrentUser();
       setUser(user);
@@ -246,8 +263,11 @@ export const AdminProvider = ({ children }: { children: ReactNode }) => {
     return result;
   };
 
+  // 🔥 FIXED: Now clears localStorage
   const logout = async () => {
     await signOut();
+    // ✅ Clear localStorage on logout
+    localStorage.removeItem("admin_auth");
     setIsAuthenticated(false);
     setUser(null);
   };
