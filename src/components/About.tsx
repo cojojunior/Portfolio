@@ -32,13 +32,13 @@ const About = () => {
                 />
                 <div className="absolute inset-0 rounded-lg sm:rounded-2xl bg-gradient-to-b from-transparent via-transparent/30 to-golden/10 pointer-events-none" />
 
-                {/* Experience Badge */}
-                <div className="absolute bottom-1 sm:bottom-2 left-2 sm:left-6 bg-black/35 backdrop-blur-md p-1 sm:p-4 rounded-md sm:rounded-md  h-fit w-fit">
-                  <span className="block text-lg sm:text-2xl font-bold text-white leading-tight tracking-wide">
-                    1 +
+                {/* Experience Badge - Compact */}
+                <div className="absolute bottom-1 sm:bottom-2 left-2 sm:left-6 bg-black/35 backdrop-blur-md px-1.5 sm:px-3 py-0.5 sm:py-1.5 rounded-md sm:rounded-md h-fit w-fit">
+                  <span className="block text-[10px] sm:text-2xl font-bold text-white leading-none tracking-wide">
+                    1+
                   </span>
-                  <span className="text-golden text-[5px] sm:text-sm font-medium">
-                    Years experience
+                  <span className="text-golden text-[4px] sm:text-sm font-medium leading-tight">
+                    Years exp
                   </span>
                 </div>
               </div>
