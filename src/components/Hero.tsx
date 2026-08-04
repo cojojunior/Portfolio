@@ -9,9 +9,7 @@ const Hero = () => {
 
   const roles = ["FRONTEND DEVELOPER", "GRAPHIC DESIGNER", "UI/UX DESIGNER"];
 
-  // Removed mouse movement effect - keeping only typing animation
   useEffect(() => {
-    // Typing animation effect
     const currentRole = roles[loopIndex % roles.length];
     const typingSpeed = isDeleting ? 80 : 150;
     const pauseDelay = 1500;
@@ -38,16 +36,16 @@ const Hero = () => {
 
   return (
     <section
-      className="h-[80vh] md:h-[85vh] lg:h-[90vh] flex items-center justify-center relative overflow-hidden px-3 sm:px-6 lg:px-8 bg-cover bg-center bg-no-repeat"
+      className="h-fit min-h-[60vh] flex items-center justify-center relative overflow-hidden px-3 sm:px-6 lg:px-8 bg-cover bg-center bg-no-repeat"
       style={{
         backgroundImage: 'url("/img/hero.jpg")',
       }}>
       {/* Dark overlay for readability */}
       <div className="absolute inset-0 bg-black/50 z-0 pointer-events-none" />
 
-      {/* 2 COLUMNS - Full height container */}
-      <div className="max-w-7xl mx-auto w-full grid grid-cols-2 gap-2 sm:gap-8 lg:gap-12 items-center relative z-10 h-full py-8 sm:py-12">
-        {/* LEFT COLUMN - Content */}
+      {/* 2 COLUMNS - Content drives height */}
+      <div className="max-w-7xl mx-auto w-full grid grid-cols-2 gap-2 sm:gap-8 lg:gap-12 items-center relative z-10 py-6 sm:py-10 lg:py-14">
+        {/* LEFT COLUMN - Content (drives height) */}
         <div className="col-span-1 animate-fade-in-left">
           {/* Badge */}
           <div className="inline-flex items-center gap-1 sm:gap-4 px-2 sm:px-4 py-0.5 sm:py-2 border border-golden/40 rounded-full bg-black/30 backdrop-blur-sm mb-2 sm:mb-6 animate-glow-pulse tracking-wide">
@@ -102,9 +100,9 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* RIGHT COLUMN - Profile Image */}
-        <div className="col-span-1 flex justify-end items-center h-full">
-          <div className="relative w-full max-w-[120px] sm:max-w-[280px] lg:max-w-[380px]">
+        {/* RIGHT COLUMN - Profile Image (fits within content height) */}
+        <div className="col-span-1 flex justify-end items-center">
+          <div className="relative w-full max-w-[140px] sm:max-w-[260px] lg:max-w-[340px]">
             <div className="relative aspect-[3/4] rounded-lg sm:rounded-2xl overflow-hidden">
               <img
                 src="/img/cojo.JPG"
@@ -113,8 +111,8 @@ const Hero = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent/20 to-golden/10 pointer-events-none" />
 
-              {/* Location Badge - Better positioning */}
-              <div className="absolute bottom-2 sm:bottom-4 lg:bottom-6 left-1/2 -translate-x-1/2 bg-white/95 backdrop-blur-md rounded-md sm:rounded-xl border border-golden/20 text-center shadow-lg px-2 sm:px-4 py-1 sm:py-2 min-w-[80px] sm:min-w-[120px] lg:min-w-[150px]">
+              {/* Location Badge */}
+              <div className="absolute bottom-2 sm:bottom-4 lg:bottom-6 left-1/2 -translate-x-1/2 bg-white/95 backdrop-blur-md rounded-md sm:rounded-xl border border-golden/20 text-center shadow-lg px-2 sm:px-4 py-1 sm:py-2 min-w-[80px] sm:min-w-[120px] lg:min-w-[140px]">
                 <span className="text-dark-navy font-black text-[6px] sm:text-[10px] lg:text-xs whitespace-nowrap">
                   Based In ACCRA, Ghana
                 </span>
