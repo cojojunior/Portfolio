@@ -10,6 +10,7 @@ import {
   Settings,
   Menu,
   X,
+  Home,
 } from "lucide-react";
 import { useState, useEffect } from "react";
 
@@ -52,6 +53,7 @@ const AdminLayout = () => {
   };
 
   const navItems = [
+    { path: "/", icon: Home, label: "Home" },
     { path: "/admin/dashboard", icon: LayoutDashboard, label: "Dashboard" },
     { path: "/admin/projects", icon: FolderOpen, label: "Projects" },
     { path: "/admin/projects/new", icon: Plus, label: "Add Project" },
@@ -66,6 +68,9 @@ const AdminLayout = () => {
         location.pathname === "/admin/dashboard" ||
         location.pathname === "/admin"
       );
+    }
+    if (path === "/") {
+      return location.pathname === "/";
     }
     return location.pathname === path;
   };
@@ -135,7 +140,7 @@ const AdminLayout = () => {
 
       {/* Main Content */}
       <div className="flex-1 transition-all duration-300">
-        {/* Top Bar */}
+        {/* Top Bar - Minimal */}
         <header className="bg-[#161b22] border-b border-gray-700/50 px-4 sm:px-6 py-4 flex items-center justify-between sticky top-0 z-40">
           <button
             onClick={toggleSidebar}
