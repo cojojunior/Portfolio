@@ -36,7 +36,7 @@ const Hero = () => {
 
   return (
     <section
-      className="h-[28vh] sm:h-[50vh] md:h-[80vh] lg:h-[85vh] flex items-center justify-center relative overflow-hidden px-3 py-10 sm:px-6 lg:px-8 bg-cover bg-center bg-no-repeat"
+      className="h-[25vh] sm:h-[70vh] md:h-[80vh] lg:h-[85vh] flex items-center justify-center relative overflow-hidden px-3 py-8 sm:px-6 sm:py-4 lg:px-8 bg-cover bg-center bg-no-repeat"
       style={{
         backgroundImage: 'url("/img/hero.jpg")',
       }}>
@@ -44,12 +44,12 @@ const Hero = () => {
       <div className="absolute inset-0 bg-black/50 z-0 pointer-events-none" />
 
       {/* 2 COLUMNS - Full height container */}
-      <div className="max-w-7xl mx-auto w-full grid grid-cols-2 gap-2 sm:gap-8 lg:gap-12 items-center relative z-10 h-full sm:h-[30vh] py-2 sm:py-4 lg:py-6">
+      <div className="max-w-7xl mx-auto w-full grid grid-cols-2 gap-2 sm:gap-8 lg:gap-12 items-center relative z-10 h-full py-2 sm:py-1 lg:py-6">
         {/* LEFT COLUMN - Content */}
         <div className="col-span-1 animate-fade-in-left">
           {/* Badge */}
           <div className="inline-flex items-center gap-1 sm:gap-4 px-2 sm:px-4 py-0.5 sm:py-2 border border-golden/40 rounded-full bg-black/30 backdrop-blur-sm mb-1.5 sm:mb-6 animate-glow-pulse tracking-wide">
-            <span className="w-1 h-1 sm:w-2 sm:h-2 rounded-full bg-golden animate-pulse-dot" />
+            <span className="w-1 h-fit sm:w-2 sm:h-2 rounded-full bg-golden animate-pulse-dot" />
             <span className="text-white text-[6px] sm:text-sm font-semibold tracking-wider">
               Available For Bookings
             </span>
@@ -102,7 +102,7 @@ const Hero = () => {
 
         {/* RIGHT COLUMN - Profile Image */}
         <div className="col-span-1 flex justify-end items-center">
-          <div className="relative w-full max-w-[120px] sm:max-w-[260px] lg:max-w-[340px]">
+          <div className="relative w-full max-w-[100px] sm:max-w-[200px] lg:max-w-[340px]">
             <div className="relative aspect-[3/4] rounded-lg sm:rounded-2xl overflow-hidden">
               <img
                 src="/img/cojo.JPG"
@@ -112,7 +112,7 @@ const Hero = () => {
               <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent/20 to-golden/10 pointer-events-none" />
 
               {/* Location Badge */}
-              <div className="absolute bottom-1 sm:bottom-4 lg:bottom-6 left-1/2 -translate-x-1/2 bg-white/95 backdrop-blur-md rounded sm:rounded-xl border border-golden/20 text-center shadow-lg px-1.5 sm:px-4 py-0.5 sm:py-2 min-w-[60px] sm:min-w-[120px] lg:min-w-[140px]">
+              <div className="absolute bottom-1 sm:bottom-4 lg:bottom-6 left-1/2 -translate-x-1/2 bg-white/95 backdrop-blur-md rounded sm:rounded-xl border border-golden/20 text-center shadow-lg px-1.5 sm:px-4 py-0.5 sm:py-2 min-w-[40px] sm:min-w-[120px] lg:min-w-[140px]">
                 <span className="text-dark-navy font-black text-[5px] sm:text-[10px] lg:text-xs whitespace-nowrap">
                   Based In ACCRA, Ghana
                 </span>
