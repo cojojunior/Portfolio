@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AdminProvider } from "@/context/AdminContext";
+import { ServiceProvider } from "@/context/ServiceContext";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
@@ -12,6 +13,8 @@ import AdminLayout from "./pages/admin/AdminLayout";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminProjects from "./pages/admin/AdminProjects";
 import AdminProjectForm from "./pages/admin/AdminProjectForm";
+import AdminServices from "./pages/admin/AdminServices";
+import AdminServiceForm from "./pages/admin/AdminServicesForm";
 
 // Protected Route Component
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -38,60 +41,67 @@ function App() {
   return (
     <Router>
       <AdminProvider>
-        <Routes>
-          {/* Public Routes with Navbar & Footer */}
-          <Route
-            path="/"
-            element={
-              <PublicLayout>
-                <Home />
-              </PublicLayout>
-            }
-          />
-          <Route
-            path="/projects"
-            element={
-              <PublicLayout>
-                <ProjectsPage />
-              </PublicLayout>
-            }
-          />
-          <Route
-            path="/blog"
-            element={
-              <PublicLayout>
-                <BlogPage />
-              </PublicLayout>
-            }
-          />
-          <Route
-            path="/about"
-            element={
-              <PublicLayout>
-                <AboutPage />
-              </PublicLayout>
-            }
-          />
+        <ServiceProvider>
+          <Routes>
+            {/* Public Routes with Navbar & Footer */}
+            <Route
+              path="/"
+              element={
+                <PublicLayout>
+                  <Home />
+                </PublicLayout>
+              }
+            />
+            <Route
+              path="/projects"
+              element={
+                <PublicLayout>
+                  <ProjectsPage />
+                </PublicLayout>
+              }
+            />
+            <Route
+              path="/blog"
+              element={
+                <PublicLayout>
+                  <BlogPage />
+                </PublicLayout>
+              }
+            />
+            <Route
+              path="/about"
+              element={
+                <PublicLayout>
+                  <AboutPage />
+                </PublicLayout>
+              }
+            />
 
-          {/* Admin Auth Routes (no Navbar/Footer) */}
-          <Route path="/admin/login" element={<AdminLogin />} />
-          <Route path="/admin/register" element={<AdminRegister />} />
+            {/* Admin Auth Routes */}
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/admin/register" element={<AdminRegister />} />
 
-          {/* Admin Protected Routes (no Navbar/Footer) */}
-          <Route
-            path="/admin"
-            element={
-              <ProtectedRoute>
-                <AdminLayout />
-              </ProtectedRoute>
-            }>
-            <Route index element={<AdminDashboard />} />
-            <Route path="dashboard" element={<AdminDashboard />} />
-            <Route path="projects" element={<AdminProjects />} />
-            <Route path="projects/new" element={<AdminProjectForm />} />
-            <Route path="projects/edit/:id" element={<AdminProjectForm />} />
-          </Route>
-        </Routes>
+            {/* Admin Protected Routes */}
+            <Route
+              path="/admin"
+              element={
+                <ProtectedRoute>
+                  <AdminLayout />
+                </ProtectedRoute>
+              }>
+              <Route index element={<AdminDashboard />} />
+              <Route path="dashboard" element={<AdminDashboard />} />
+              <Route path="projects" element={<AdminProjects />} />
+              <Route path="projects/new" element={<AdminProjectForm />} />
+              <Route path="projects/edit/:id" element={<AdminProjectForm />} />
+
+              {/* ✅ Service routes - admin can manage them but they don't appear in sidebar */}
+              <Route path="services" element={<AdminServices />} />
+              <Route path="services/new" element={<AdminServiceForm />} />
+              <Route path="services/edit/:id" element={<AdminServiceForm />} />
+            </Route>
+          </Routes>
+        </ServiceProvider>
       </AdminProvider>
     </Router>
   );
