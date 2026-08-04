@@ -10,7 +10,7 @@ import {
   Settings,
   Menu,
   Home,
-} from "lucide-react"; 
+} from "lucide-react";
 import { useState, useEffect } from "react";
 
 const AdminLayout = () => {
@@ -146,12 +146,17 @@ const AdminLayout = () => {
       <div className="flex-1 min-h-screen w-full">
         {/* Top Bar */}
         <header className="bg-[#161b22] border-b border-gray-700/50 px-4 sm:px-6 py-4 flex items-center justify-between sticky top-0 z-40">
+          {/* ✅ Menu button only shows on mobile */}
           <button
             onClick={toggleSidebar}
-            className="text-gray-400 hover:text-white transition-all duration-300 p-2 hover:bg-gray-700/30 rounded-lg"
+            className="md:hidden text-gray-400 hover:text-white transition-all duration-300 p-2 hover:bg-gray-700/30 rounded-lg"
             aria-label="Toggle sidebar">
             <Menu className="w-5 h-5" />
           </button>
+
+          {/* ✅ Empty div to maintain spacing on desktop */}
+          <div className="hidden md:block"></div>
+
           <div className="flex items-center gap-3 sm:gap-4">
             <span className="text-gray-400 text-xs sm:text-sm hidden sm:block">
               Admin
