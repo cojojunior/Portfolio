@@ -77,12 +77,12 @@ const ServicesSection = () => {
                   {service.features.slice(0, 2).map((feature, idx) => (
                     <span
                       key={idx}
-                      className="px-1.5 md:px-2.5 py-0.5 bg-golden/200/70 text-gray-700 rounded text-[8px] md:text-xs">
+                      className="px-1.5 md:px-2.5 py-0.5 bg-golden/10 text-gray-200 rounded text-[8px] md:text-xs">
                       {feature}
                     </span>
                   ))}
                   {service.features.length > 2 && (
-                    <span className="px-1.5 md:px-2.5 py-0.5 bg-golden/200/70 text-gray-700 rounded text-[8px] md:text-xs">
+                    <span className="px-1.5 md:px-2.5 py-0.5 bg-golden/10 text-gray-200 rounded text-[8px] md:text-xs">
                       +{service.features.length - 2}
                     </span>
                   )}
