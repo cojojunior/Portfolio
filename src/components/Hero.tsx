@@ -36,16 +36,16 @@ const Hero = () => {
 
   return (
     <section
-      className="h-fit min-h-[60vh] flex items-center justify-center relative overflow-hidden px-3 sm:px-6 lg:px-8 bg-cover bg-center bg-no-repeat"
+      className="h-fit sm:h-[70vh] md:h-[80vh] lg:h-[85vh] flex items-center justify-center relative overflow-hidden px-3 sm:px-6 lg:px-8 bg-cover bg-center bg-no-repeat"
       style={{
         backgroundImage: 'url("/img/hero.jpg")',
       }}>
       {/* Dark overlay for readability */}
       <div className="absolute inset-0 bg-black/50 z-0 pointer-events-none" />
 
-      {/* 2 COLUMNS - Content drives height */}
+      {/* 2 COLUMNS - Content drives height on mobile, fixed on tablet+ */}
       <div className="max-w-7xl mx-auto w-full grid grid-cols-2 gap-2 sm:gap-8 lg:gap-12 items-center relative z-10 py-6 sm:py-10 lg:py-14">
-        {/* LEFT COLUMN - Content (drives height) */}
+        {/* LEFT COLUMN - Content */}
         <div className="col-span-1 animate-fade-in-left">
           {/* Badge */}
           <div className="inline-flex items-center gap-1 sm:gap-4 px-2 sm:px-4 py-0.5 sm:py-2 border border-golden/40 rounded-full bg-black/30 backdrop-blur-sm mb-2 sm:mb-6 animate-glow-pulse tracking-wide">
@@ -77,9 +77,9 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Description */}
-          <div className="mb-2 sm:mb-4">
-            <p className="text-white/80 text-[7px] sm:text-base leading-relaxed drop-shadow-lg max-w-md">
+          {/* Description - Hidden on mobile to save space */}
+          <div className="hidden sm:block mb-2 sm:mb-4">
+            <p className="text-white/80 text-sm sm:text-base leading-relaxed drop-shadow-lg max-w-md">
               I build accessible, pixel-perfect, and performant modern web
               applications with clean code and great UX.
             </p>
@@ -100,9 +100,9 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* RIGHT COLUMN - Profile Image (fits within content height) */}
+        {/* RIGHT COLUMN - Profile Image */}
         <div className="col-span-1 flex justify-end items-center">
-          <div className="relative w-full max-w-[140px] sm:max-w-[260px] lg:max-w-[340px]">
+          <div className="relative w-full max-w-[120px] sm:max-w-[260px] lg:max-w-[340px]">
             <div className="relative aspect-[3/4] rounded-lg sm:rounded-2xl overflow-hidden">
               <img
                 src="/img/cojo.JPG"
@@ -111,9 +111,9 @@ const Hero = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent/20 to-golden/10 pointer-events-none" />
 
-              {/* Location Badge */}
-              <div className="absolute bottom-2 sm:bottom-4 lg:bottom-6 left-1/2 -translate-x-1/2 bg-white/95 backdrop-blur-md rounded-md sm:rounded-xl border border-golden/20 text-center shadow-lg px-2 sm:px-4 py-1 sm:py-2 min-w-[80px] sm:min-w-[120px] lg:min-w-[140px]">
-                <span className="text-dark-navy font-black text-[6px] sm:text-[10px] lg:text-xs whitespace-nowrap">
+              {/* Location Badge - Smaller on mobile */}
+              <div className="absolute bottom-1 sm:bottom-4 lg:bottom-6 left-1/2 -translate-x-1/2 bg-white/95 backdrop-blur-md rounded sm:rounded-xl border border-golden/20 text-center shadow-lg px-1.5 sm:px-4 py-0.5 sm:py-2 min-w-[60px] sm:min-w-[120px] lg:min-w-[140px]">
+                <span className="text-dark-navy font-black text-[5px] sm:text-[10px] lg:text-xs whitespace-nowrap">
                   Based In ACCRA, Ghana
                 </span>
               </div>
