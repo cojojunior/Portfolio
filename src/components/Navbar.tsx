@@ -38,7 +38,7 @@ const Navbar = () => {
               alt="CodeWithCojo Logo"
               className="w-10 h-10 rounded-full object-cover transition-all group-hover:shadow-[0_0_20px_rgba(252,163,17,0.3)]"
             />
-            <span className="text-xl font-bold text-dark-navy">
+            <span className="text-sm font-bold text-dark-navy">
               CodeWith-COJO
             </span>
           </Link>
