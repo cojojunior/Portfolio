@@ -62,12 +62,12 @@ const ServicesSection = () => {
               </h3>
 
               {/* Description - Hidden on mobile, show on tablet+ */}
-              <p className="hidden sm:block text-gray-200 text-sm leading-relaxed mb-4 line-clamp-3">
+              <p className="hidden sm:block text-dark-navy-200 text-sm leading-relaxed mb-4 line-clamp-3">
                 {service.description}
               </p>
 
               {/* Description - Short version for mobile */}
-              <p className="sm:hidden text-gray-400 text-[10px] leading-relaxed mb-2 line-clamp-2">
+              <p className="sm:hidden text-dark-navy-200 text-[10px] leading-relaxed mb-2 line-clamp-2">
                 {service.description}
               </p>
 
@@ -77,12 +77,12 @@ const ServicesSection = () => {
                   {service.features.slice(0, 2).map((feature, idx) => (
                     <span
                       key={idx}
-                      className="px-1.5 md:px-2.5 py-0.5 bg-gray-700/30 text-gray-300 rounded text-[8px] md:text-xs">
+                      className="px-1.5 md:px-2.5 py-0.5 bg-dark-navy/20 text-golden-300 rounded text-[8px] md:text-xs">
                       {feature}
                     </span>
                   ))}
                   {service.features.length > 2 && (
-                    <span className="px-1.5 md:px-2.5 py-0.5 bg-gray-700/30 text-gray-300 rounded text-[8px] md:text-xs">
+                    <span className="px-1.5 md:px-2.5 py-0.5 bg-dark-navy/20 text-golden-200 rounded text-[8px] md:text-xs">
                       +{service.features.length - 2}
                     </span>
                   )}
