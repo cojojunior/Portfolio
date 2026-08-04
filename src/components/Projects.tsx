@@ -11,17 +11,17 @@ const Projects = () => {
     (project) => filter === "all" || project.category === filter,
   );
 
-  // Show only first 6 projects on home page
   const displayedProjects = filteredProjects.slice(0, 6);
 
   return (
     <section
       id="projects"
-      className="min-h-[10vh] flex items-center justify-center px-2 sm:px-6 lg:px-8 py-2 sm:py-12 bg-white my-[10px]">
+      className="min-h-[20vh] flex items-center justify-center px-2 sm:px-6 lg:px-8 py-1 sm:py-12 bg-white my-[5px]">
       <div className="max-w-7xl mx-auto w-full">
-        {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1.5 sm:gap-6 mb-2 sm:mb-8">
-          <div>
+        {/* Header with inline buttons */}
+        <div className="flex flex-row items-center justify-between gap-1.5 sm:gap-6 mb-2 sm:mb-8">
+          <div className="flex items-center gap-1 sm:gap-4">
+            <span className="w-0.5 sm:w-1 h-3.5 sm:h-5 bg-golden rounded-full" />
             <h2 className="text-sm sm:text-4xl lg:text-5xl font-extrabold text-dark-navy tracking-tight">
               Featured Projects
             </h2>
@@ -30,7 +30,7 @@ const Projects = () => {
           <div className="flex gap-1 sm:gap-3">
             <button
               onClick={() => setFilter("all")}
-              className={`px-2 sm:px-5 py-0.5 sm:py-2 rounded-full text-[6px] sm:text-sm font-medium transition-all duration-300 ${
+              className={`px-1.5 sm:px-5 py-0.5 sm:py-2 rounded-full text-[5px] sm:text-sm font-medium transition-all duration-300 ${
                 filter === "all"
                   ? "bg-golden text-white shadow-[0_0_20px_rgba(252,163,17,0.3)]"
                   : "border border-golden/30 text-dark-navy hover:text-golden hover:border-golden"
@@ -39,7 +39,7 @@ const Projects = () => {
             </button>
             <button
               onClick={() => setFilter("web")}
-              className={`px-2 sm:px-5 py-0.5 sm:py-2 rounded-full text-[6px] sm:text-sm font-medium transition-all duration-300 ${
+              className={`px-1.5 sm:px-5 py-0.5 sm:py-2 rounded-full text-[5px] sm:text-sm font-medium transition-all duration-300 ${
                 filter === "web"
                   ? "bg-golden text-white shadow-[0_0_20px_rgba(252,163,17,0.3)]"
                   : "border border-golden/30 text-dark-navy hover:text-golden hover:border-golden"
@@ -48,7 +48,7 @@ const Projects = () => {
             </button>
             <button
               onClick={() => setFilter("graphics")}
-              className={`px-2 sm:px-5 py-0.5 sm:py-2 rounded-full text-[6px] sm:text-sm font-medium transition-all duration-300 ${
+              className={`px-1.5 sm:px-5 py-0.5 sm:py-2 rounded-full text-[5px] sm:text-sm font-medium transition-all duration-300 ${
                 filter === "graphics"
                   ? "bg-golden text-white shadow-[0_0_20px_rgba(252,163,17,0.3)]"
                   : "border border-golden/30 text-dark-navy hover:text-golden hover:border-golden"
@@ -68,7 +68,7 @@ const Projects = () => {
                 animationDelay: `${index * 100}ms`,
                 animationFillMode: "backwards",
               }}>
-              <div className="transition-transform duration-300 ease-in-out hover:scale-[1.02] h-full">
+              <div className="transition-transform duration-100 ease-in-out hover:scale-[1.04] h-full">
                 <ProjectCard project={project} />
               </div>
             </div>
