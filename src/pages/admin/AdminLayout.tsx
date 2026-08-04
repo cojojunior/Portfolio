@@ -9,9 +9,8 @@ import {
   Users,
   Settings,
   Menu,
-  X,
   Home,
-} from "lucide-react";
+} from "lucide-react"; 
 import { useState, useEffect } from "react";
 
 const AdminLayout = () => {
@@ -20,16 +19,17 @@ const AdminLayout = () => {
   const location = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
 
   // Check if screen is mobile
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-      if (window.innerWidth >= 768) {
-        setSidebarOpen(true);
-      } else {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      // Close sidebar on mobile by default
+      if (mobile) {
         setSidebarOpen(false);
+      } else {
+        setSidebarOpen(true);
       }
     };
 
@@ -76,49 +76,25 @@ const AdminLayout = () => {
     return location.pathname === path;
   };
 
-  // Determine sidebar width based on state
-  const getSidebarWidth = () => {
-    if (isMobile) {
-      return sidebarOpen ? "w-64" : "w-0";
-    }
-    // Desktop: collapsed by default, expands on hover
-    if (isHovered || sidebarOpen) {
-      return "w-64";
-    }
-    return "w-20";
-  };
-
-  // Determine margin for main content
-  const getContentMargin = () => {
-    if (isMobile) {
-      return "ml-0";
-    }
-    // Desktop: match sidebar width
-    if (isHovered || sidebarOpen) {
-      return "ml-64";
-    }
-    return "ml-20";
-  };
-
   return (
     <div className="min-h-screen bg-[#0d1117] flex">
       {/* Overlay for mobile */}
       {isMobile && sidebarOpen && (
         <div
-          className="fixed inset-0 bg-black/50 z-40"
+          className="fixed inset-0 bg-black/70 z-40"
           onClick={closeSidebar}
         />
       )}
 
-      {/* Sidebar - Full height with hover expand */}
+      {/* Sidebar - Overlays on mobile, static on desktop */}
       <aside
-        onMouseEnter={() => !isMobile && setIsHovered(true)}
-        onMouseLeave={() => !isMobile && setIsHovered(false)}
         className={`
-          ${getSidebarWidth()}
-          ${isMobile ? (sidebarOpen ? "translate-x-0" : "-translate-x-full") : "translate-x-0"}
-          bg-[#161b22] border-r border-gray-700/50 transition-all duration-300 ease-in-out
-          flex flex-col fixed md:relative h-screen z-50 overflow-hidden flex-shrink-0
+          fixed md:relative z-50 h-screen
+          bg-[#161b22] border-r border-gray-700/50
+          transition-all duration-300 ease-in-out
+          flex flex-col overflow-hidden flex-shrink-0
+          ${isMobile ? (sidebarOpen ? "left-0" : "-left-64") : "left-0 w-64"}
+          ${isMobile ? "w-64" : "w-64"}
         `}>
         {/* Logo */}
         <div className="p-4 border-b border-gray-700/50 flex items-center gap-3 min-h-[72px]">
@@ -127,8 +103,7 @@ const AdminLayout = () => {
             alt="Logo"
             className="w-10 h-10 rounded-full object-cover flex-shrink-0"
           />
-          <div
-            className={`transition-opacity duration-300 ${isHovered || sidebarOpen ? "opacity-100" : "opacity-0 md:opacity-0"} ${isMobile ? "opacity-100" : ""}`}>
+          <div>
             <h1 className="text-white font-bold text-sm whitespace-nowrap">
               Admin Panel
             </h1>
@@ -145,26 +120,13 @@ const AdminLayout = () => {
               key={item.path}
               to={item.path}
               onClick={closeSidebar}
-              className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-300 group relative ${
+              className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-300 group ${
                 isActive(item.path)
                   ? "bg-golden/20 text-golden"
                   : "text-gray-400 hover:bg-gray-700/30 hover:text-white"
               }`}>
               <item.icon className="w-5 h-5 flex-shrink-0" />
-              <span
-                className={`text-sm whitespace-nowrap transition-opacity duration-300 ${
-                  isHovered || sidebarOpen
-                    ? "opacity-100"
-                    : "opacity-0 md:opacity-0"
-                } ${isMobile ? "opacity-100" : ""}`}>
-                {item.label}
-              </span>
-              {/* Tooltip for collapsed state */}
-              {!isMobile && !isHovered && !sidebarOpen && (
-                <span className="absolute left-full ml-2 px-2 py-1 bg-gray-800 text-white text-xs rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-50">
-                  {item.label}
-                </span>
-              )}
+              <span className="text-sm whitespace-nowrap">{item.label}</span>
             </Link>
           ))}
         </nav>
@@ -173,44 +135,22 @@ const AdminLayout = () => {
         <div className="p-4 border-t border-gray-700/50">
           <button
             onClick={handleLogout}
-            className="flex items-center gap-3 px-3 py-2.5 w-full rounded-lg text-red-400 hover:bg-red-500/10 transition-all duration-300 group relative">
+            className="flex items-center gap-3 px-3 py-2.5 w-full rounded-lg text-red-400 hover:bg-red-500/10 transition-all duration-300 group">
             <LogOut className="w-5 h-5 flex-shrink-0" />
-            <span
-              className={`text-sm whitespace-nowrap transition-opacity duration-300 ${
-                isHovered || sidebarOpen
-                  ? "opacity-100"
-                  : "opacity-0 md:opacity-0"
-              } ${isMobile ? "opacity-100" : ""}`}>
-              Sign Out
-            </span>
-            {/* Tooltip for collapsed state */}
-            {!isMobile && !isHovered && !sidebarOpen && (
-              <span className="absolute left-full ml-2 px-2 py-1 bg-gray-800 text-white text-xs rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-50">
-                Sign Out
-              </span>
-            )}
+            <span className="text-sm whitespace-nowrap">Sign Out</span>
           </button>
         </div>
       </aside>
 
-      {/* Main Content - No gap between sidebar and content */}
-      <div
-        className={`
-          flex-1 transition-all duration-300 ease-in-out
-          ${getContentMargin()}
-          min-h-screen
-        `}>
+      {/* Main Content - No margin, full width */}
+      <div className="flex-1 min-h-screen w-full">
         {/* Top Bar */}
         <header className="bg-[#161b22] border-b border-gray-700/50 px-4 sm:px-6 py-4 flex items-center justify-between sticky top-0 z-40">
           <button
             onClick={toggleSidebar}
             className="text-gray-400 hover:text-white transition-all duration-300 p-2 hover:bg-gray-700/30 rounded-lg"
             aria-label="Toggle sidebar">
-            {sidebarOpen ? (
-              <X className="w-5 h-5" />
-            ) : (
-              <Menu className="w-5 h-5" />
-            )}
+            <Menu className="w-5 h-5" />
           </button>
           <div className="flex items-center gap-3 sm:gap-4">
             <span className="text-gray-400 text-xs sm:text-sm hidden sm:block">
