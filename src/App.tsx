@@ -23,38 +23,75 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   return children;
 };
 
+// Layout for public routes (with Navbar & Footer)
+const PublicLayout = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <div className="min-h-screen flex flex-col">
+      <Navbar />
+      <main className="flex-1">{children}</main>
+      <Footer />
+    </div>
+  );
+};
+
 function App() {
   return (
     <Router>
       <AdminProvider>
-        <div className="min-h-screen bg-white">
-          <Navbar />
-          <Routes>
-            {/* Public Routes */}
-            <Route path="/" element={<Home />} />
-            <Route path="/projects" element={<ProjectsPage />} />
-            <Route path="/blog" element={<BlogPage />} />
-            <Route path="/about" element={<AboutPage />} />
+        <Routes>
+          {/* Public Routes with Navbar & Footer */}
+          <Route
+            path="/"
+            element={
+              <PublicLayout>
+                <Home />
+              </PublicLayout>
+            }
+          />
+          <Route
+            path="/projects"
+            element={
+              <PublicLayout>
+                <ProjectsPage />
+              </PublicLayout>
+            }
+          />
+          <Route
+            path="/blog"
+            element={
+              <PublicLayout>
+                <BlogPage />
+              </PublicLayout>
+            }
+          />
+          <Route
+            path="/about"
+            element={
+              <PublicLayout>
+                <AboutPage />
+              </PublicLayout>
+            }
+          />
 
-            {/* Admin Routes */}
-            <Route path="/admin/login" element={<AdminLogin />} />
-            <Route path="/admin/register" element={<AdminRegister />} />
-            <Route
-              path="/admin"
-              element={
-                <ProtectedRoute>
-                  <AdminLayout />
-                </ProtectedRoute>
-              }>
-              <Route index element={<AdminDashboard />} />
-              <Route path="dashboard" element={<AdminDashboard />} />
-              <Route path="projects" element={<AdminProjects />} />
-              <Route path="projects/new" element={<AdminProjectForm />} />
-              <Route path="projects/edit/:id" element={<AdminProjectForm />} />
-            </Route>
-          </Routes>
-          <Footer />
-        </div>
+          {/* Admin Auth Routes (no Navbar/Footer) */}
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin/register" element={<AdminRegister />} />
+
+          {/* Admin Protected Routes (no Navbar/Footer) */}
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute>
+                <AdminLayout />
+              </ProtectedRoute>
+            }>
+            <Route index element={<AdminDashboard />} />
+            <Route path="dashboard" element={<AdminDashboard />} />
+            <Route path="projects" element={<AdminProjects />} />
+            <Route path="projects/new" element={<AdminProjectForm />} />
+            <Route path="projects/edit/:id" element={<AdminProjectForm />} />
+          </Route>
+        </Routes>
       </AdminProvider>
     </Router>
   );
