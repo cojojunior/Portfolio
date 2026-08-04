@@ -1,14 +1,21 @@
 // src/pages/admin/AdminProjectForm.tsx
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAdmin } from "@/context/AdminContext";
 import { Project } from "@/types";
-import { ArrowLeft, Save, Trash2, X } from "lucide-react";
+import {
+  ArrowLeft,
+  Save,
+  Trash2,
+  X,
+  Upload,
+  Image as ImageIcon,
+} from "lucide-react";
+import { supabase } from "@/lib/supabase";
 
 const categoryOptions = [
   { value: "web", label: "Web Development" },
   { value: "graphics", label: "Graphics Design" },
-  // ✅ REMOVED "mobile" from here since it's not in the Project type
 ];
 
 const AdminProjectForm = () => {
@@ -16,6 +23,7 @@ const AdminProjectForm = () => {
   const navigate = useNavigate();
   const { projects, addProject, updateProject, deleteProject } = useAdmin();
   const isEditing = !!id;
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [formData, setFormData] = useState<Omit<Project, "id">>({
     title: "",
@@ -29,6 +37,8 @@ const AdminProjectForm = () => {
   const [tagInput, setTagInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [imagePreview, setImagePreview] = useState("");
+  const [uploadingImage, setUploadingImage] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
 
   // Load project data if editing
   useEffect(() => {
@@ -41,7 +51,7 @@ const AdminProjectForm = () => {
           image: project.image,
           tags: project.tags || [],
           link: project.link || "",
-          category: project.category, // ✅ This will be "web" or "graphics"
+          category: project.category,
         });
         setImagePreview(project.image);
       }
@@ -76,13 +86,105 @@ const AdminProjectForm = () => {
     });
   };
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const url = e.target.value;
-    setFormData({
-      ...formData,
-      image: url,
-    });
-    setImagePreview(url);
+  // ✅ Upload image to Supabase Storage
+  const uploadImageToSupabase = async (file: File): Promise<string | null> => {
+    try {
+      setUploadingImage(true);
+      setUploadProgress(0);
+
+      // Generate unique filename
+      const fileExt = file.name.split(".").pop();
+      const fileName = `${Date.now()}-${Math.random().toString(36).substring(2, 15)}.${fileExt}`;
+      const filePath = `projects/${fileName}`;
+
+      // Upload to Supabase Storage
+      const { error: uploadError } = await supabase.storage
+        .from("project-images") // Your bucket name
+        .upload(filePath, file, {
+          cacheControl: "3600",
+          upsert: false,
+        });
+
+      if (uploadError) {
+        console.error("Upload error:", uploadError);
+        throw uploadError;
+      }
+
+      setUploadProgress(100);
+
+      // Get public URL
+      const { data } = supabase.storage
+        .from("project-images")
+        .getPublicUrl(filePath);
+
+      return data.publicUrl;
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      return null;
+    } finally {
+      setUploadingImage(false);
+      setUploadProgress(0);
+    }
+  };
+
+  // ✅ Handle file selection
+  const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Validate file type
+    const allowedTypes = [
+      "image/jpeg",
+      "image/png",
+      "image/gif",
+      "image/webp",
+      "image/svg+xml",
+    ];
+    if (!allowedTypes.includes(file.type)) {
+      alert("Please upload a valid image file (JPEG, PNG, GIF, WEBP, or SVG)");
+      return;
+    }
+
+    // Validate file size (max 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      alert("Image size should be less than 5MB");
+      return;
+    }
+
+    // Show local preview
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setImagePreview(reader.result as string);
+    };
+    reader.readAsDataURL(file);
+
+    // Upload to Supabase
+    const publicUrl = await uploadImageToSupabase(file);
+
+    if (publicUrl) {
+      setFormData({
+        ...formData,
+        image: publicUrl,
+      });
+    } else {
+      alert("Failed to upload image. Please try again.");
+      // Reset preview if upload failed
+      setImagePreview(formData.image || "");
+    }
+  };
+
+  // ✅ Trigger file input click
+  const handleUploadClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  // ✅ Remove image
+  const handleRemoveImage = () => {
+    setImagePreview("");
+    setFormData({ ...formData, image: "" });
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -213,43 +315,81 @@ const AdminProjectForm = () => {
           />
         </div>
 
-        {/* Image URL */}
+        {/* Image Upload */}
         <div>
           <label className="block text-sm font-medium text-gray-300 mb-2">
-            Image URL *
+            Project Image *
           </label>
-          <div className="flex gap-3">
-            <input
-              type="text"
-              name="image"
-              value={formData.image}
-              onChange={handleImageChange}
-              className="flex-1 px-4 py-2 bg-[#0d1117] border border-gray-700 rounded-lg text-white focus:outline-none focus:border-golden focus:ring-2 focus:ring-golden/20 transition-all duration-300"
-              placeholder="https://example.com/image.jpg"
-              required
-            />
-          </div>
-          {imagePreview && (
-            <div className="mt-3 relative inline-block">
+
+          {/* Hidden file input */}
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            onChange={handleFileSelect}
+            className="hidden"
+          />
+
+          {/* Upload Area */}
+          {!imagePreview ? (
+            <div
+              onClick={handleUploadClick}
+              className="border-2 border-dashed border-gray-600 rounded-lg p-8 text-center cursor-pointer hover:border-golden transition-all duration-300 group">
+              <Upload className="w-12 h-12 text-gray-500 mx-auto mb-3 group-hover:text-golden transition-all duration-300" />
+              <p className="text-gray-400 text-sm">Click to upload an image</p>
+              <p className="text-gray-500 text-xs mt-1">
+                PNG, JPG, GIF, WEBP, SVG (Max 5MB)
+              </p>
+              <button
+                type="button"
+                onClick={handleUploadClick}
+                className="mt-3 px-4 py-2 bg-golden/20 text-golden rounded-lg hover:bg-golden/30 transition-all duration-300 text-sm">
+                Choose File
+              </button>
+            </div>
+          ) : (
+            <div className="relative inline-block">
               <img
                 src={imagePreview}
                 alt="Preview"
-                className="w-32 h-32 object-cover rounded-lg border border-gray-700"
+                className="w-48 h-48 object-cover rounded-lg border border-gray-700"
                 onError={(e) => {
                   (e.target as HTMLImageElement).src = "/placeholder.jpg";
                 }}
               />
-              <button
-                type="button"
-                onClick={() => {
-                  setImagePreview("");
-                  setFormData({ ...formData, image: "" });
-                }}
-                className="absolute -top-2 -right-2 p-1 bg-red-500 text-white rounded-full hover:bg-red-600 transition-all duration-300">
-                <X className="w-3 h-3" />
-              </button>
+              {/* Upload Progress */}
+              {uploadingImage && (
+                <div className="absolute inset-0 bg-black/50 rounded-lg flex items-center justify-center">
+                  <div className="text-center">
+                    <div className="w-12 h-12 border-4 border-golden border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
+                    <p className="text-white text-sm">
+                      Uploading... {uploadProgress}%
+                    </p>
+                  </div>
+                </div>
+              )}
+              {/* Action Buttons */}
+              <div className="absolute top-2 right-2 flex gap-2">
+                <button
+                  type="button"
+                  onClick={handleUploadClick}
+                  className="p-1.5 bg-golden/90 text-dark-navy rounded-lg hover:bg-golden transition-all duration-300"
+                  title="Change image">
+                  <ImageIcon className="w-4 h-4" />
+                </button>
+                <button
+                  type="button"
+                  onClick={handleRemoveImage}
+                  className="p-1.5 bg-red-500/90 text-white rounded-lg hover:bg-red-500 transition-all duration-300"
+                  title="Remove image">
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
             </div>
           )}
+
+          {/* Image URL (hidden, auto-filled) */}
+          <input type="hidden" name="image" value={formData.image} />
         </div>
 
         {/* Tags */}
@@ -318,14 +458,16 @@ const AdminProjectForm = () => {
           </button>
           <button
             type="submit"
-            disabled={loading}
-            className="flex items-center gap-2 px-6 py-2 bg-golden text-dark-navy rounded-lg hover:bg-golden-dark transition-all duration-300 font-medium disabled:opacity-50">
+            disabled={loading || uploadingImage}
+            className="flex items-center gap-2 px-6 py-2 bg-golden text-dark-navy rounded-lg hover:bg-golden-dark transition-all duration-300 font-medium disabled:opacity-50 disabled:cursor-not-allowed">
             <Save className="w-4 h-4" />
-            {loading
-              ? "Saving..."
-              : isEditing
-                ? "Update Project"
-                : "Add Project"}
+            {uploadingImage
+              ? "Uploading Image..."
+              : loading
+                ? "Saving..."
+                : isEditing
+                  ? "Update Project"
+                  : "Add Project"}
           </button>
         </div>
       </form>
