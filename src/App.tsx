@@ -17,6 +17,7 @@ import AdminProjects from "./pages/admin/AdminProjects";
 import AdminProjectForm from "./pages/admin/AdminProjectForm";
 import AdminServices from "./pages/admin/AdminServices";
 import AdminServiceForm from "./pages/admin/AdminServicesForm";
+import NotFound from "./components/NotFound";
 
 // Protected Route Component
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -96,7 +97,7 @@ function App() {
                 </ProtectedRoute>
               }>
               <Route index element={<AdminDashboard />} />
-              <Route path="dashboard" element={<AdminDashboard />} />
+              <Route path="/admin/dashboard" element={<AdminDashboard />} />
               <Route path="projects" element={<AdminProjects />} />
               <Route path="projects/new" element={<AdminProjectForm />} />
               <Route path="projects/edit/:id" element={<AdminProjectForm />} />
@@ -104,6 +105,8 @@ function App() {
               <Route path="services/new" element={<AdminServiceForm />} />
               <Route path="services/edit/:id" element={<AdminServiceForm />} />
             </Route>
+
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </ServiceProvider>
       </AdminProvider>
