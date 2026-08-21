@@ -22,7 +22,7 @@ const Contact = () => {
       id="contact"
       className="px-3 sm:px-6 lg:px-8 py-6 sm:py-20 bg-white my-[5px]">
       <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-2 gap-2 sm:gap-4 lg:gap-6 rounded-xl sm:rounded-2xl overflow-hidden shadow-[0_25px_80px_rgba(0,0,0,0.1)] border-2 border-golden/20">
+        <div className="grid grid-cols-2 gap-2 sm:gap-4 lg:gap-6 rounded-xl sm:rounded-2xl overflow-hidden shadow-[0_25px_80px_rgba(0,0,0,0.1)] ">
           {/* LEFT COLUMN - Image with overlay */}
           <div
             className="relative bg-cover bg-center bg-no-repeat min-h-[180px] sm:min-h-[300px] lg:min-h-[500px]"

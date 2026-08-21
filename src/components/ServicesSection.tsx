@@ -46,7 +46,7 @@ const ServicesSection = () => {
         </div>
 
         {/* Services Grid - 3 columns on ALL screen sizes */}
-        <div className="grid grid-cols-3 gap-2 md:gap-6">
+        <div className="grid grid-cols-3 gap-5 md:gap-6">
           {services.map((service) => (
             <div
               key={service.id}

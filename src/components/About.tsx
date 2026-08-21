@@ -17,7 +17,7 @@ const About = () => {
   return (
     <section
       id="about"
-      className="min-h-[30vh] flex items-center justify-center px-3 sm:px-6 lg:px-8 lg:py-5 bg-white">
+      className="min-h-[30vh] flex items-center justify-center py-5 px-3 sm:px-6 lg:px-8 lg:py-5 bg-white">
       <div className="max-w-7xl mx-auto w-full">
         {/* Main Content - 2 columns on mobile with image left */}
         <div className="grid grid-cols-2 gap-2 sm:gap-8 lg:gap-12 items-center">
@@ -30,15 +30,14 @@ const About = () => {
                   alt="Developer"
                   className="w-full h-full object-cover object-center"
                 />
-                <div className="absolute inset-0 rounded-lg sm:rounded-2xl bg-gradient-to-b from-transparent via-transparent/30 to-golden/10 pointer-events-none" />
 
                 {/* Experience Badge - Compact */}
-                <div className="absolute bottom-1 sm:bottom-2 left-2 sm:left-6 bg-black/35 backdrop-blur-md px-1.5 sm:px-3 py-0.5 sm:py-1.5 rounded-md sm:rounded-md h-fit w-fit">
+                <div className="absolute bottom-1 sm:bottom-2 lg:bottom-5 left-2 sm:left-6 bg-black/55 backdrop-blur-md px-1.5 sm:px-3 py-0.5 sm:py-1.5 rounded-md sm:rounded-md h-fit w-fit">
                   <span className="block text-[10px] sm:text-2xl font-bold text-white leading-none tracking-wide">
                     1+
                   </span>
                   <span className="text-golden text-[4px] sm:text-sm font-medium leading-tight">
-                    Years exp
+                    Year Experience
                   </span>
                 </div>
               </div>

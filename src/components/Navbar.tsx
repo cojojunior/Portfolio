@@ -74,7 +74,7 @@ const Navbar = () => {
               href="https://github.com/cojojunior"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 border border-golden/30 rounded-lg text-gray-600 hover:text-golden hover:border-golden hover:shadow-[0_0_12px_rgba(252,163,17,0.2)] transition-all duration-300"
+              className="p-2 border border-gray-600/10 rounded-lg text-gray-600 hover:text-golden hover:border-golden hover:shadow-[0_0_12px_rgba(252,163,17,0.2)] transition-all duration-300"
               aria-label="GitHub">
               <img src="/img/github.svg" alt="GitHub" className="w-5 h-5" />
             </a>
@@ -82,7 +82,7 @@ const Navbar = () => {
               href="https://www.linkedin.com/in/bright-sakyi-junior-akyea-09aaa1370/"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 border border-golden/30 rounded-lg text-gray-600 hover:text-golden hover:border-golden hover:shadow-[0_0_12px_rgba(252,163,17,0.2)] transition-all duration-300"
+              className="p-2 border border-gray-600/10 rounded-lg text-gray-600 hover:text-golden hover:border-golden hover:shadow-[0_0_12px_rgba(252,163,17,0.2)] transition-all duration-300"
               aria-label="LinkedIn">
               <img src="/img/linkedin.svg" alt="LinkedIn" className="w-5 h-5" />
             </a>
@@ -90,7 +90,7 @@ const Navbar = () => {
               href="https://wa.me/233570622400"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 border border-golden/30 rounded-lg text-gray-600 hover:text-golden hover:border-golden hover:shadow-[0_0_12px_rgba(252,163,17,0.2)] transition-all duration-300"
+              className="p-2 border border-gray-600/10 rounded-lg text-gray-600 hover:text-golden hover:border-golden hover:shadow-[0_0_12px_rgba(252,163,17,0.2)] transition-all duration-300"
               aria-label="WhatsApp">
               <img src="/img/WhatsApp.svg" alt="WhatsApp" className="w-5 h-5" />
             </a>
