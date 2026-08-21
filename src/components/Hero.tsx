@@ -36,7 +36,7 @@ const Hero = () => {
 
   return (
     <section
-      className=" h-fit flex items-center justify-center relative overflow-hidden px-4 sm:px-6 sm:py-4 lg:px-6 lg:py-1 bg-cover bg-center bg-no-repeat mt-10 "
+      className=" h-fit flex items-center justify-center relative overflow-hidden px-4 sm:px-6 sm:py-4 lg:px-6 lg:py-1 bg-cover bg-center bg-no-repeat mt-6 "
       style={{
         backgroundImage: 'url("/img/hero.jpg")',
       }}>
