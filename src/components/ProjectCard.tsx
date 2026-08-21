@@ -73,7 +73,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
           {project.tags.slice(0, 3).map((tag) => (
             <span
               key={tag}
-              className="px-1 sm:px-2.5 py-.5 sm:py-1 h-fit w-fit border border-golden/20 rounded-md bg-dark-navy/5 text-dark-navy text-[7px] sm:text-[10px] md:text-xs font-medium transition-all duration-100 group-hover:border-golden group-hover:text-golden group-hover:bg-golden/10 whitespace-nowrap">
+              className="px-1 sm:px-2.5 py-.5 sm:py-1 h-fit w-fit border border-golden/20 rounded-md text-dark-navy text-[7px] sm:text-[10px] md:text-xs font-medium transition-all duration-100 group-hover:border-golden/40 group-hover:text-dark-navy/60 group-hover:bg-golden/5 whitespace-nowrap">
               {tag}
             </span>
           ))}
