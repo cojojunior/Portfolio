@@ -36,19 +36,19 @@ const Hero = () => {
 
   return (
     <section
-      className="h-[160px] lg:h-[70vh] md:h-[70vh] sm:h-[60vh] flex items-center justify-center relative overflow-hidden px-3 py-1 sm:px-6 sm:py-4 lg:px-8 bg-cover bg-center bg-no-repeat mt-10 sm:mt-14"
+      className=" h-fit flex items-center justify-center relative overflow-hidden px-4 sm:px-6 sm:py-4 lg:px-6 lg:py-1 bg-cover bg-center bg-no-repeat mt-10 "
       style={{
         backgroundImage: 'url("/img/hero.jpg")',
       }}>
       {/* Dark overlay for readability */}
       <div className="absolute inset-0 bg-black/50 z-0 pointer-events-none" />
 
-      {/* 2 COLUMNS - Equal height with 2px padding */}
-      <div className="max-w-5xl mx-auto w-full grid grid-cols-5 gap-1 sm:gap-2 lg:gap-4 relative z-10 h-full py-2 sm:py-1 lg:py-6">
-        {/* LEFT COLUMN - Content (takes 3/5 of the space) */}
-        <div className="col-span-3 animate-fade-in-left h-full flex flex-col justify-center p-[2px]">
+      {/* 2 COLUMNS - Equal width and height */}
+      <div className="max-w-4xl mx-auto w-full grid grid-cols-2 gap-1 sm:gap-2 lg:gap-4 relative z-10 h-full py-1 sm:py-1 lg:py-1">
+        {/* LEFT COLUMN - Content */}
+        <div className="col-span-1 animate-fade-in-left h-full flex flex-col justify-center p-[2px]">
           {/* Badge */}
-          <div className="inline-flex items-center gap-1 sm:gap-4 px-2 sm:px-4 py-0.5 sm:py-2 border border-golden/40 rounded-full bg-black/30 backdrop-blur-sm mb-1.5 sm:mb-6 animate-glow-pulse tracking-wide w-fit">
+          <div className="inline-flex items-center gap-1 sm:gap-4 px-2 sm:px-4 py-0.5 sm:py-2 border border-[#fca311]/30 rounded-full bg-black/30 backdrop-blur-sm mb-1.5 sm:mb-6 animate-glow-pulse tracking-wide w-fit">
             <span className="w-1 h-fit sm:w-2 sm:h-2 rounded-full bg-golden animate-pulse-dot" />
             <span className="text-white text-[6px] sm:text-sm font-semibold tracking-wider whitespace-nowrap">
               Available For Bookings
@@ -100,24 +100,14 @@ const Hero = () => {
           </div>
         </div>
 
-       
-        {/* RIGHT COLUMN - Profile Image (takes 2/5 of the space) */}
-        <div className="col-span-2 flex justify-end items-center h-full p-[2px]" >
-          <div className="relative w-full max-w-[100px] sm:max-w-[240px] md:max-w-[45vh] lg:max-w-[300px] h-full flex items-center">
-            <div className="relative aspect-[3/4] w-full h-full max-h-full md:w-full rounded-lg sm:rounded-2xl overflow-hidden">
-              <img
-                src="/img/cojo.JPG"
-                alt="Cojo - UI/UX & Frontend Developer"
-                className="w-full h-full object-cover object-center"
-              />
-
-              {/* Location Badge */}
-              <div className="absolute bottom-1 sm:bottom-4 lg:bottom-6 left-1/2 -translate-x-1/2 bg-white/95 backdrop-blur-md rounded sm:rounded-xl text-center shadow-lg px-1 sm:px-4 py-0.5 sm:py-2 min-w-[10px] h-[14px] sm:h-auto sm:min-w-[120px] lg:min-w-[140px] flex items-center justify-center">
-                <span className="text-dark-navy font-black text-[4px] sm:text-[10px] lg:text-xs whitespace-nowrap leading-none">
-                  Based In ACCRA, Ghana
-                </span>
-              </div>
-            </div>
+        {/* RIGHT COLUMN - Logo Image */}
+        <div className="col-span-1 flex justify-end items-center h-full p-[2px]">
+          <div className="relative w-[70vh] h-full flex items-center justify-center">
+            <img
+              src="/img/mylogo.png"
+              alt="CodeWithCojo Logo"
+              className="w-full h-full object-contain object-center p-4 sm:p-6 lg:p-8"
+            />
           </div>
         </div>
       </div>
