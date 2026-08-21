@@ -36,7 +36,7 @@ const Hero = () => {
 
   return (
     <section
-      className=" h-fit flex items-center justify-center relative overflow-hidden px-4 sm:px-6 sm:py-4 lg:px-6 lg:py-1 bg-cover bg-center bg-no-repeat mt-6 "
+      className=" h-fit flex items-center justify-center relative overflow-hidden px-3 py-6 sm:px-6 sm:py-2 lg:px-6 lg:py-1 bg-cover bg-center bg-no-repeat mb-2 mt-"
       style={{
         backgroundImage: 'url("/img/hero.jpg")',
       }}>
@@ -101,8 +101,9 @@ const Hero = () => {
         </div>
 
         {/* RIGHT COLUMN - Logo Image */}
-        <div className="col-span-1 flex justify-end items-center h-full p-[2px]">
-          <div className="relative w-[70vh] h-full flex items-center justify-center">
+        <div
+          className="col-span-1 flex justify-end items-center h-full p-[2px]">
+          <div className="relative w-[80vh] flex items-center justify-center">
             <img
               src="/img/mylogo.png"
               alt="CodeWithCojo Logo"
